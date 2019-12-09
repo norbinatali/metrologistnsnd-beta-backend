@@ -21,8 +21,7 @@ import {
         InvalidEmailConfirmToken,
         UserEmailUnconfirmedError
 } from '../../errors';
-import {any} from "prop-types";
-import {getUser} from "graphql-authentication";
+
 
 
 function validatePassword(ctx: Context, value: string) {
