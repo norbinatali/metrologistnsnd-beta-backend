@@ -2,7 +2,7 @@ import { v4 } from "uuid";
 import {Context} from "./utils";
 import * as Email from 'email-templates';
 import {User} from "./generated/prisma-client";
-import { GraphqlAuthenticationPrismaAdapter } from 'graphql-authentication-prisma';
+
 import {doc} from "prettier";
 
 
