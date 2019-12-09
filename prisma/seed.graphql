@@ -1,0 +1,22 @@
+mutation{user1: createUser(data: {
+  email: "alice@prisma.io"
+  name: "Alice"
+  password: "$2b$10$dqyYw5XovLjpmkYNiRDEWuwKaRAvLaG45fnXE5b3KTccKZcRPka2m" # "secret42"
+  companyName:"New"
+  posts: {
+    create: {
+      title: "Join us for GraphQL Conf 2019 in Berlin"
+      content: "https://www.graphqlconf.org/"
+      published: true
+    }
+  }
+  resetToken:"4c4d21ea-efae-4391-b80a-5b5ee122b64f"
+  resetExpires:"2019-11-23T19:18:58.573Z"
+  role:ADMIN
+  devices:{create:{name_EN:"dskfhsd" name_RUS:"dsfdsf" name_UA:"djfhsk" category:"dfjds" module:"dgdfg" published:true tr:{ create:{ name_TR_EN:"T1", name_TR_UA:"T2"}}  }}
+}
+
+) {
+  id
+}
+}

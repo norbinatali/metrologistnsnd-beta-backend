@@ -1,0 +1,93 @@
+scalar DateTime
+type Query {
+  feed: [Post!]!
+  drafts: [Post!]!
+  trs: [TR!]!
+  post(id: ID!): Post
+  newDevice: [Device!]!
+  allDevice: [Device!]!
+  device(id: ID!): Device
+  tr(id:ID!):TR
+  me: User
+}
+
+type Mutation {
+  signup(email: String!, password: String!, name: String!, companyName:String): AuthPayload!
+  login(email: String!, password: String!): AuthPayload!
+  upgradeUser(email:String, password:String, name:String):User!
+  createDraft(title: String!, content: String!): Post!
+  publish(id: ID!): Post!
+  deletePost(id: ID!): Post!
+  createNewDevice(name: String!, category: String!, module:String!): Device!
+  publishDevice(id: ID!): Device!
+  deleteDevice(id: ID!): Device!
+  createNewTR(name_TR_EN:String!, name_TR_UA:String!):TR!
+    createNewLetter(from:String!, subject:String!, text:String!):LetterEmail!
+    passwordReset( email:String!,resetToken: String!, password: String!):User!
+  changePassword(oldpassword:String!, newpassword:String!, email:String):User!
+  triggerPasswordReset(email: String!): TriggerPasswordResetPayload!
+
+}
+
+type Subscription {
+  feedSubscription: Post
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String!
+  companyName:String
+  posts: [Post!]!
+  devices: [Device!]!
+  role: Role!
+  resetToken: String
+  resetExpires: DateTime
+
+}
+
+type Post {
+  id: ID!
+  published: Boolean!
+  title: String!
+  content: String!
+  author: User!
+}
+type Device {
+  id: ID!
+  published: Boolean!
+  name_EN: String!
+  name_UA: String!
+  name_RUS: String!
+  category: String!
+  module:String
+  author: User!
+  tr:TR!
+}
+type TR {
+  id:ID!
+  name_TR_UA:String!
+  name_TR_EN:String!
+  device_id:[Device!]!
+}
+type LetterEmail{
+  id:ID!
+  from:String!
+  subject:String!
+  text:String!
+}
+enum Role{
+  ADMIN
+  CUSTUMER
+}
+type TriggerPasswordResetPayload {
+ok: Boolean!
+  resetToken:String
+  email: String
+
+}
