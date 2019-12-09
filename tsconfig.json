@@ -10,5 +10,5 @@
       "esnext", "dom"
     ]
   }
-  "include": ["generated", "prisma"],
+  "exclude": ["generated", "prisma"],
 }
