@@ -4,10 +4,11 @@
     "moduleResolution": "node",
     "module": "commonjs",
     "sourceMap": true,
-    "rootDir": ["generated","prisma","src"],
+    "rootDir": "src",
     "outDir": "dist",
     "lib": [
       "esnext", "dom"
     ]
   }
+  "include": ["generated", "prisma"],
 }
