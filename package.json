@@ -5,7 +5,7 @@
     "debug": "dotenv -- nodemon -e ts,graphql -x ts-node --inspect src/index.ts",
     "rimraf": "./node_modules/rimraf/bin.js",
      "dev": "node -r dotenv/config",
-    "build": "npm run dist && tsc"
+    "build": "rimraf dist && tsc"
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
