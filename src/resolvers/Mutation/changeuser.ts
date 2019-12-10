@@ -30,7 +30,7 @@ function validatePassword(ctx: Context, value: string) {
     }
 }
 function generateToken(user: User, ctx: Context) {
-    return jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+    return jwt.sign({ userId: user.id }, "jwtsecret123");
 }
 function getHashedPassword(value: string) {
     return bcrypt.hash(value, 10);
