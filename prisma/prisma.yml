@@ -3,6 +3,8 @@ endpoint: https://eu1.prisma.sh/public-lightfright-56/backend/dev
 
 # Defines your models, each model is mapped to the database as a table.
 datamodel: datamodel.prisma
+secret: "mysecret123"
+app_secret: "jwtsecret123"
 
 # Specifies the language and directory for the generated Prisma client.
 generate:
