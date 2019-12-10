@@ -18,8 +18,7 @@
     "prisma-client-lib": "^1.34.8",
     "validator": "latest",
     "apollo-errors": "latest",
-    "email-templates": "latest",
-  
+    "email-templates": "latest"  
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.2",
