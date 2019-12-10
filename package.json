@@ -18,9 +18,8 @@
     "prisma-client-lib": "^1.34.8",
     "validator": "latest",
     "apollo-errors": "latest",
-    "graphql-authentication": "latest",
     "email-templates": "latest",
-    "graphql-authentication-prisma": "latest"
+  
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.2",
