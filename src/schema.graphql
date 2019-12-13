@@ -67,7 +67,7 @@ type Device {
   category: String!
   module:String
   author: User!
-  tr:TR!
+  tr:TR
 }
 type TR {
   id:ID!
