@@ -28,7 +28,7 @@ type Device {
   name_RUS:String!
   category: String!
   module:String
-  tr: TR!
+  tr: TR
   author: User!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
