@@ -1,4 +1,4 @@
-import {Context,updateUser} from "../../utils";
+import {Context,updateUser,updateUserResetToken} from "../../utils";
 import * as bcrypt from "bcryptjs";
 import * as validator from 'validator';
 import * as jwt from 'jsonwebtoken'
