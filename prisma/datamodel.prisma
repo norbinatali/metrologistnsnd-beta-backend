@@ -1,0 +1,59 @@
+type Post {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  published: Boolean! @default(value: false)
+  title: String!
+  content: String!
+  author: User!
+}
+
+type User {
+  id: ID! @id
+  email: String! @unique
+  password: String!
+  name: String!
+  companyName:String
+  posts: [Post!]!
+  devices: [Device!]!
+  emailConfirmed: Boolean!
+  emailConfirmToken:String!
+  role: Role! @default(value: CUSTOMER)
+  resetToken: String
+  resetExpires: DateTime
+}
+type Device {
+  id: ID! @id
+  published: Boolean! @default(value: false)
+  name_EN: String!
+  name_UA: String!
+  name_RUS:String!
+  category: String!
+  module:String
+  tr: TR!
+  author: User!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+
+}
+
+type TR{
+id: ID! @id
+name_TR_UA:String!
+name_TR_EN: String!
+device_id: [Device!]!
+createdAt: DateTime! @createdAt
+updatedAt: DateTime! @updatedAt
+}
+
+type LetterEmail{
+id: ID! @id
+from: String!
+subject: String!
+text: String!
+}
+
+enum Role{
+ADMIN
+CUSTOMER
+}
