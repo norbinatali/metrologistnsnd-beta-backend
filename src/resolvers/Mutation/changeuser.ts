@@ -114,14 +114,14 @@ export const changeUser= {
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-                user: 'norbinatali@gmail.com',
+                user: 'nataliia.hachok@gmail.com',
                 pass: 'NataliBear3'
             }
         });
 
         transporter.sendMail({
             template: 'passwordReset',
-            from:"norbinatali@gmail.com",
+            from:"nataliia.hachok@gmail.com",
            to:user.email,
             subject: `Confirm your password on Metrologist`,
             text: "Hi,\n" +
