@@ -1,10 +1,9 @@
-import {Context,updateUser} from "../../utils";
+import {Context, findUserByEmail, getUserId, updateUserPassword, updateUserResetToken} from "../../utils";
 import * as bcrypt from "bcryptjs";
 import * as validator from 'validator';
 import * as jwt from 'jsonwebtoken'
 import {User} from "../../generated/prisma-client";
 const nodemailer = require("nodemailer");
-
 const path = require('path');
 import { v4 as uuid } from 'uuid';
 import {
@@ -25,12 +24,12 @@ import {
 
 
 function validatePassword(ctx: Context, value: string) {
-    if (value.length < 8) {
+    if (!ctx.graphqlAuthentication.validatePassword!(value)) {
         throw new PasswordTooShortError();
     }
 }
 function generateToken(user: User, ctx: Context) {
-    return jwt.sign({ userId: user.id }, "jwtsecret123");
+    return jwt.sign({ userId: user.id }, process.env.APP_SECRET);
 }
 function getHashedPassword(value: string) {
     return bcrypt.hash(value, 10);
@@ -38,6 +37,7 @@ function getHashedPassword(value: string) {
 
 
 export const changeUser= {
+
     async upgradeUser(_, {email, password, name}, ctx: Context) {
         const userUp = await ctx.prisma.user({email});
         if (!userUp) {
@@ -45,11 +45,35 @@ export const changeUser= {
         } else {
             userUp.password = password;
             userUp.name = name;
-            userUp.email = email;
             return userUp;
         }
     },
 
+
+    async passwordReset(parent: any, {email, resetToken, password}: { email: string; resetToken: string; password: string },
+        ctx: Context) {
+        if (!resetToken || !password) {
+            throw new MissingDataError();
+        }
+        const user = await ctx.prisma.user({ email});
+
+        if (new Date() > new Date(user.resetExpires)) {
+            throw new ResetTokenExpiredError();
+        }
+
+        validatePassword(ctx, password);
+        const hashedPassword = await getHashedPassword(password);
+
+        await updateUserResetToken(ctx, user.email, {resetToken: '', resetExpires: undefined
+        });
+        await updateUserPassword(ctx, user.email, {password: hashedPassword});
+
+        return {
+            email: user.email,
+            password: user.password,
+            name:user.name,
+        };
+    },
     async changePassword(parent: any, { oldpassword, newpassword, email }: { oldpassword: string; newpassword: string, email: string },
         ctx: Context
     ) {
@@ -61,27 +85,32 @@ export const changeUser= {
         }
         validatePassword(ctx, newpassword);
         const password = await getHashedPassword(newpassword);
-        const newuser= await updateUser(ctx, user.email, {password});
+        const newuser= await updateUserPassword(ctx, user.email, {password});
       return {
           id:newuser.id,
            email: newuser.email,
           name:newuser.name,
           password:newuser.password
     }
+
     },
+
     async triggerPasswordReset(parent: any, {email}: { email: string }, ctx: Context) {
         if (!validator.isEmail(email)) {
             throw new InvalidEmailError();
         }
+
         const user = await ctx.prisma.user({ email});
         if (!user) {
             return {ok: true};
         }
         const resetToken = uuid();
+
         const now = new Date();
 // Expires in two hours
         const resetExpires = new Date(now.getTime() + 7200000).toISOString();
-        await updateUser(ctx, user.email, {resetToken, resetExpires});
+
+        await updateUserResetToken(ctx, user.email, {resetToken, resetExpires});
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
@@ -89,6 +118,7 @@ export const changeUser= {
                 pass: 'NataliBear3'
             }
         });
+
         transporter.sendMail({
             template: 'passwordReset',
             from:"norbinatali@gmail.com",
@@ -97,46 +127,30 @@ export const changeUser= {
             text: "Hi,\n" +
                 "You requested a password reset on Metrologist.\n" +
                 "\n" +
-                  'http://metrologistnsnd-beta-frontend.herokuapp.com/reset-password?email='+email+'&resetToken='+resetToken + "\n"+ "Reset my password.",
+                  "http://localhost:3000/reset-password/"+resetToken + "\n"+ "Reset my password.",
+
         },
             function (err, info, response) {
+console.log(user.email);
             if(err)
                 console.log(err);
             else
-                response.redirect('http://metrologistnsnd-beta-frontend.herokuapp.com/');
+                response.redirect('http://localhost:3000/reset-password/'+resetToken);
         });
-        console.log(user.email);
+
+
         return {
             ok: true,
-            resetToken:user.resetToken,
-            email:user.email
-        };
-    },
-    async passwordReset(parent: any, {email, resetToken, password}: { email: string; resetToken: string; password: string },
-                        ctx: Context) {
-        if (!resetToken || !password) {
-            throw new MissingDataError();
-        }
-        console.log(email);
-        const user =  await ctx.prisma.user({email});
-        console.log(user);
-        if (user.resetToken !== resetToken) { throw new Error('anu poshov otsudogo')}
-        if (!validator.isEmail(email)) {
-            throw new InvalidEmailError();
-        }
-        validatePassword(ctx, password);
-        const hashedPassword = await getHashedPassword(password);
-        console.log(user.email);
+            resetToken:user.resetToken
 
-        await updateUser(ctx, user.email, {resetToken: '',password: hashedPassword
-        });
-        return {
-            email: user.email,
-            password: user.password,
-            name:user.name,
         };
-    },
+
+    }
+
+
 };
+
+
 
 
 
