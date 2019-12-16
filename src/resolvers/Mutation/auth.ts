@@ -29,7 +29,7 @@ export const auth = {
           text: "Hi,\n" +
               "You sign up on Metrologist. Confirm your email:\n" +
               "\n" +
-              'http://localhost:3000/confirm-email?email='+user.email+'&emailConfirmToken='+emailConfirmToken+ '\n',
+              'http://metrologistnsnd-beta-frontend.herokuapp.com/confirm-email?email='+user.email+'&emailConfirmToken='+emailConfirmToken+ '\n',
 
         },
         function (err, info, response) {
@@ -37,7 +37,7 @@ export const auth = {
           if(err)
             console.log(err);
           else
-            response.redirect('http://localhost:3000/');
+            response.redirect('http://metrologistnsnd-beta-frontend.herokuapp.com/');
         });
     return {
       token: jwt.sign({ userId: user.id }, "jwtsecret123"),
