@@ -103,8 +103,8 @@ export const changeUser= {
             if(err)
                 console.log(err);
             else
-                response.redirect('http://metrologistnsnd-beta-frontend.herokuapp.com/);
-        });
+                response.redirect('http://metrologistnsnd-beta-frontend.herokuapp.com/');
+        }),
         console.log(user.email);
         return {
             ok: true,
