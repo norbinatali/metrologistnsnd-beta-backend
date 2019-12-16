@@ -26,7 +26,7 @@ type Mutation {
     passwordReset( email:String!,resetToken: String!, password: String!):User!
   changePassword(oldpassword:String!, newpassword:String!, email:String):User!
   triggerPasswordReset(email: String!): TriggerPasswordResetPayload!
-
+confirmEmail(email: String!, emailConfirmToken: String!): AuthPayload!
 }
 
 type Subscription {
@@ -48,7 +48,8 @@ type User {
   role: Role!
   resetToken: String
   resetExpires: DateTime
-
+emailConfirmToken:String!
+ emailConfirmed: Boolean!
 }
 
 type Post {
