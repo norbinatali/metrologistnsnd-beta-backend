@@ -11,8 +11,8 @@ export const auth = {
     const emailConfirmToken = uuid();
     const user = await ctx.prisma.createUser({ ...args,password, emailConfirmToken,
       email:args.email,
-      emailConfirmed: false,
-      joinedAt: new Date().toISOString() });
+      emailConfirmed: false
+       });
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
