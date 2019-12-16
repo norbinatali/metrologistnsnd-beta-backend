@@ -3,7 +3,7 @@ type Query {
   drafts: [Post!]!
   trs: [TR!]!
   post(id: ID!): Post
-  devices: [Device!]!
+  allDevices [Device!]!
   draftsDevice: [Device!]!
   device(id: ID!): Device
   tr(id:ID!):TR
