@@ -51,23 +51,23 @@ export const changeUser= {
 
 
     async passwordReset(parent: any, {email, resetToken, password}: { email: string; resetToken: string; password: string },
-        ctx: Context) {
+                        ctx: Context) {
         if (!resetToken || !password) {
             throw new MissingDataError();
         }
-        const user = await ctx.prisma.user({ email});
-
-        if (new Date() > new Date(user.resetExpires)) {
-            throw new ResetTokenExpiredError();
+        console.log(email);
+        const user =  await ctx.prisma.user({email});
+        console.log(user);
+        if (user.resetToken !== resetToken) { throw new Error('anu poshov otsudogo')}
+        if (!validator.isEmail(email)) {
+            throw new InvalidEmailError();
         }
-
         validatePassword(ctx, password);
         const hashedPassword = await getHashedPassword(password);
+        console.log(user.email);
 
-        await updateUserResetToken(ctx, user.email, {resetToken: '', resetExpires: undefined
+        await updateUser(ctx, user.email, {resetToken: '',password: hashedPassword
         });
-        await updateUserPassword(ctx, user.email, {password: hashedPassword});
-
         return {
             email: user.email,
             password: user.password,
@@ -85,7 +85,7 @@ export const changeUser= {
         }
         validatePassword(ctx, newpassword);
         const password = await getHashedPassword(newpassword);
-        const newuser= await updateUserPassword(ctx, user.email, {password});
+        const newuser= await updateUser(ctx, user.email, {password});
       return {
           id:newuser.id,
            email: newuser.email,
