@@ -1,11 +1,10 @@
 import * as jwt from 'jsonwebtoken'
 import { Prisma } from './generated/prisma-client'
-import {IGraphqlAuthenticationConfig} from "./createConfirmationURL";
+
 
 export interface Context {
   prisma: Prisma
   request: any
-  graphqlAuthentication: IGraphqlAuthenticationConfig,
 }
 export function updateUser(ctx: Context, email: string, data: any) {
   return ctx.prisma.updateUser({
