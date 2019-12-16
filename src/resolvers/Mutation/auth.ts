@@ -9,7 +9,7 @@ export const auth = {
   async signup(parent, args, ctx: Context) {
     const password = await bcrypt.hash(args.password, 10);
     const emailConfirmToken = uuid();
-    const user = await ctx.prisma.createUser({ ...args,password, emailConfirmToken: args.emailConfirmToken,
+    const user = await ctx.prisma.createUser({ ...args,password, emailConfirmToken,
       email:args.email,
       emailConfirmed: false,
       joinedAt: new Date().toISOString() });
