@@ -48,7 +48,7 @@ type User {
   role: Role!
   resetToken: String
   resetExpires: DateTime
-emailConfirmToken:String!
+emailConfirmToken:String
  emailConfirmed: Boolean!
 }
 
