@@ -1,6 +1,8 @@
 import * as bcrypt from 'bcryptjs'
 import * as jwt from 'jsonwebtoken'
-import { Context } from '../../utils'
+import { Context, updateUserResetToken } from '../../utils'
+import { v4 as uuid } from 'uuid';
+const nodemailer = require("nodemailer");
 
 export const auth = {
   async signup(parent, args, ctx: Context) {
