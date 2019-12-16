@@ -1,4 +1,4 @@
-import {Context, findUserByEmail, getUserId, updateUserPassword, updateUserResetToken} from "../../utils";
+import {Context,updateUser} from "../../utils";
 import * as bcrypt from "bcryptjs";
 import * as validator from 'validator';
 import * as jwt from 'jsonwebtoken'
@@ -24,7 +24,7 @@ import {
 
 
 function validatePassword(ctx: Context, value: string) {
-    if (!ctx.graphqlAuthentication.validatePassword!(value)) {
+    if (value.length < 8) {
         throw new PasswordTooShortError();
     }
 }
@@ -127,7 +127,7 @@ export const changeUser= {
             text: "Hi,\n" +
                 "You requested a password reset on Metrologist.\n" +
                 "\n" +
-                  "http://localhost:3000/reset-password/"+resetToken + "\n"+ "Reset my password.",
+                  "http://metrologistnsnd-beta-backend.herokuapp.com/reset-password/"+resetToken + "\n"+ "Reset my password.",
 
         },
             function (err, info, response) {
@@ -135,7 +135,7 @@ console.log(user.email);
             if(err)
                 console.log(err);
             else
-                response.redirect('http://localhost:3000/reset-password/'+resetToken);
+                response.redirect('http://metrologistnsnd-beta-backend.herokuapp.com/reset-password/'+resetToken);
         });
 
 
