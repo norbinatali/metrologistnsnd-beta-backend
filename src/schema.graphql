@@ -14,7 +14,7 @@ type Query {
 type Mutation {
   signup(email: String!, password: String!, name: String!, companyName:String): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
-  upgradeUser(email:String, password:String, name:String,companyName:String):User!
+  upgradeUser(email:String, password:String, name:String, companyName:String):User!
   createDraft(title: String!, content: String!): Post!
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!
@@ -26,7 +26,7 @@ type Mutation {
     passwordReset( email:String!,resetToken: String!, password: String!):User!
   changePassword(oldpassword:String!, newpassword:String!, email:String):User!
   triggerPasswordReset(email: String!): TriggerPasswordResetPayload!
-confirmEmail(email: String!, emailConfirmToken: String!): AuthPayload!
+  confirmEmail(email: String!, emailConfirmToken: String!): AuthPayload!
 }
 
 type Subscription {
@@ -46,10 +46,9 @@ type User {
   posts: [Post!]!
   devices: [Device!]!
   role: Role!
-  resetToken: String
-  resetExpires: DateTime
-emailConfirmToken:String
- emailConfirmed: Boolean!
+  emailConfirmed: Boolean!
+  emailConfirmToken: String
+  resetToken: String!
 }
 
 type Post {
