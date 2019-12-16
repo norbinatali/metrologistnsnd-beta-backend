@@ -53,7 +53,7 @@ export const auth = {
     if (!user) {
       throw new Error('no user found');
     }
-    if (emailConfirmToken !== emailConfirmToken || emailConfirmed) {
+    if (user.emailConfirmToken !== emailConfirmToken || user.emailConfirmed) {
       throw new Error('no right token or email');
     }
 
@@ -82,7 +82,7 @@ export const auth = {
       throw new Error('Invalid password')
     }
      if (
-        emailConfirmed == false
+        user.emailConfirmed == false
     ) {
       throw new Error('please confirm your email');
     }
