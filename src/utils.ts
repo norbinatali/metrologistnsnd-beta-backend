@@ -42,4 +42,6 @@ export function findUserByEmail(ctx: Context, email: string, info?: any){
   return user
 
 }
-
+export function updateUserResetToken(ctx: Context, email:string, data: any){
+  return updateUser(ctx, email, data);
+}
