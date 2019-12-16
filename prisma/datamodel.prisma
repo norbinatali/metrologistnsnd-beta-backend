@@ -17,8 +17,13 @@ type User {
   posts: [Post!]!
   devices: [Device!]!
   role: Role! @default(value: CUSTOMER)
-  resetToken: String
-  resetExpires: DateTime
+  emailConfirmToken:String
+    emailConfirmed: Boolean!
+    resetToken: String
+    resetExpires: DateTime
+    deletedAt: DateTime
+    lastLogin: DateTime
+    joinedAt: DateTime!
 }
 type Device {
   id: ID! @id
