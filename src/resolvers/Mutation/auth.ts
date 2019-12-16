@@ -54,7 +54,9 @@ export const auth = {
     if (!user) {
       throw new Error('no user found');
     }
-   
+    if (user.emailConfirmToken !== emailConfirmToken || user.emailConfirmed) {
+      throw new Error('no right token or email');
+    }
 
     await updateUserResetToken(
         ctx,
@@ -82,7 +84,11 @@ export const auth = {
     if (!valid) {
       throw new Error('Invalid password')
     }
-    
+    if (
+        user.emailConfirmed == false
+    ) {
+      throw new Error('please confirm your email');
+    }
     return {
       token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
       user,
