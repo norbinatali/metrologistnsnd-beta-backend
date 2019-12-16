@@ -1,4 +1,4 @@
-import {Context,updateUser,updateUserResetToken} from "../../utils";
+import {Context,updateUser} from "../../utils";
 import * as bcrypt from "bcryptjs";
 import * as validator from 'validator';
 import * as jwt from 'jsonwebtoken'
@@ -110,7 +110,7 @@ export const changeUser= {
 // Expires in two hours
         const resetExpires = new Date(now.getTime() + 7200000).toISOString();
 
-        await updateUserResetToken(ctx, user.email, {resetToken, resetExpires});
+        await updateUser(ctx, user.email, {resetToken, resetExpires});
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
