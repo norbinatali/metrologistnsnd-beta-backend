@@ -3,7 +3,20 @@ import * as jwt from 'jsonwebtoken'
 import {Context, findUserByEmail, updateUserResetToken} from '../../utils'
 import { v4 as uuid } from 'uuid';
 const nodemailer = require("nodemailer");
-
+import {
+    MissingDataError,
+        ResetTokenExpiredError,
+        InvalidEmailError,
+        PasswordTooShortError,
+        UserNotFoundError,
+        InvalidInviteTokenError,
+        UserEmailExistsError,
+        UserInviteNotAcceptedError,
+        UserDeletedError,
+        InvalidOldPasswordError,
+        InvalidEmailConfirmToken,
+        UserEmailUnconfirmedError
+} from '../../errors';
 
 export const auth = {
   async signup(parent, args, ctx: Context) {
@@ -59,7 +72,7 @@ export const auth = {
   ) {
     
     if (!emailConfirmToken || !email) {
-      throw new Error('no mail and token');
+      throw new InvalidEmailError('no mail and token');
     }
     const user = await ctx.prisma.user({ email});
     if (!user) {
