@@ -13,7 +13,7 @@ export const auth = {
       email:args.email,
       emailConfirmed: false,
       joinedAt: new Date().toISOString() });                                       
-       });
+       
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
