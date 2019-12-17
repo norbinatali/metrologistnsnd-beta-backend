@@ -24,7 +24,7 @@ export const auth = {
       throw new Error('no password provided');
     }
      if (args.email==="") {
-      throw new Error('no email provided');
+      throw new InvalidEmailError('no email provided');
     }
      if (args.name==="") {
       throw new Error('no name provided');
@@ -72,7 +72,7 @@ export const auth = {
   ) {
     
     if (!emailConfirmToken || !email) {
-      throw new InvalidEmailError('no mail and token');
+      throw new Error('no mail and token');
     }
     const user = await ctx.prisma.user({ email});
     if (!user) {
@@ -99,7 +99,7 @@ export const auth = {
 
   async login(parent, {email, password }, ctx: Context) {
  if (email==="") {
-      throw new Error('no mail provided');
+      throw new InvalidEmailError('no mail provided');
     }
     if (password==="" ) {
       throw new Error('no password provided');
