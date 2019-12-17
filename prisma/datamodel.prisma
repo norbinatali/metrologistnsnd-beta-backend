@@ -21,6 +21,8 @@ type User {
   role: Role! @default(value: CUSTOMER)
   resetToken: String
   resetExpires: DateTime
+  lastLogin: DateTime
+    joinedAt: DateTime!
 }
 type Device {
   id: ID! @id
