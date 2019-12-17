@@ -85,10 +85,10 @@ export const auth = {
   },
 
   async login(parent, {email, password }, ctx: Context) {
- if (args.email==="") {
+ if (email==="") {
       throw new Error('no mail provided');
     }
-    if (args.password==="" ) {
+    if (password==="" ) {
       throw new Error('no password provided');
     }
     const user = await ctx.prisma.user({ email});
