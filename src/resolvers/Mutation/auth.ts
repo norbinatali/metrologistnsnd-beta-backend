@@ -7,6 +7,9 @@ const nodemailer = require("nodemailer");
 
 export const auth = {
   async signup(parent, args, ctx: Context) {
+    if (!args.password || !args.email || !args.name) {
+      throw new Error('no email and password, name provided');
+    }
     const password = await bcrypt.hash(args.password, 10);
     const emailConfirmToken = uuid();
     const user = await ctx.prisma.createUser({ ...args,password, emailConfirmToken,
@@ -75,7 +78,9 @@ export const auth = {
   },
 
   async login(parent, {email, password }, ctx: Context) {
-
+if (!password || !email) {
+      throw new Error('no mail and password provided');
+    }
     const user = await ctx.prisma.user({ email});
 
     if (!user) {
