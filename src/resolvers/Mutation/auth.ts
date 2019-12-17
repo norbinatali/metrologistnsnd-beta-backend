@@ -90,7 +90,7 @@ export const auth = {
       throw new Error('please confirm your email');
     }
     return {
-      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
+      token: jwt.sign({ userId: user.id }, "jwtsecret123"),
       user,
     }
   },
