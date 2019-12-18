@@ -1,7 +1,7 @@
 import { createError } from 'apollo-errors';
 
 export const MissingDataError = createError('MissingDataError', {
-    message: 'Not all required fields are filled in.'
+    message: 'Not all required fields are filled in. Не заповненні данні'
 });
 
 export const InvalidEmailError = createError('InvalidEmailError', {
