@@ -5,7 +5,7 @@ export const MissingDataError = createError('MissingDataError', {
 });
 
 export const InvalidEmailError = createError('InvalidEmailError', {
-    message: 'Given email is invalid.'
+    message: 'Given email is invalid. Данна електронна пошта невірна'
 });
 
 export const ResetTokenExpiredError = createError('ResetTokenExpiredError', {
@@ -17,7 +17,7 @@ export const PasswordTooShortError = createError('PasswordTooShortError', {
 });
 
 export const UserNotFoundError = createError('UserNotFoundError', {
-    message: 'No user found.'
+    message: 'No user found. Користувача не знайдено'
 });
 
 export const InvalidInviteTokenError = createError('InvalidInviteTokenError', {
@@ -39,6 +39,7 @@ export const UserInviteNotAcceptedError = createError(
     'UserInviteNotAcceptedError',
     {
         message: 'User has not accepted invite yet.'
+
     }
 );
 
@@ -49,7 +50,7 @@ export const UserDeletedError = createError('UserDeletedError', {
 export const UserEmailUnconfirmedError = createError(
     'UserEmailUnconfirmedError',
     {
-        message: 'Users email has not been confirmed yet.'
+        message: 'Users email has not been confirmed yet. Електронна пошта не підтверджена'
     }
 );
 
