@@ -99,24 +99,22 @@ export const auth = {
 
   async login(parent, {email, password }, ctx: Context) {
  if (email==="") {
-      throw new InvalidEmailError('no mail provided');
+      throw new MissingDataError();
     }
     if (password==="" ) {
-      throw new Error('no password provided');
+      throw new MissingDataError();
     }
     const user = await ctx.prisma.user({ email});
 
     if (!user) {
-      throw new Error(`No such user found for email: ${email}`)
+      throw new InvalidEmailError()
     }
     const valid = await bcrypt.compare(password, user.password);
-    if (!valid) {
-      throw new Error('Invalid password')
-    }
+    
     if (
         user.emailConfirmed == false
     ) {
-      throw new Error('please confirm your email');
+      throw new UserEmailUnconfirmedError();
     }
     return {
       token: jwt.sign({ userId: user.id }, "jwtsecret123"),
