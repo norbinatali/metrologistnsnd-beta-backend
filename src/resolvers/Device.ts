@@ -7,4 +7,7 @@ export const Device = {
     tr: ({id}, args, ctx: Context) => {
         return ctx.prisma.device({id}).tr()
     },
+    deviceTypeCategory: ({ id }, args, ctx: Context) => {
+        return ctx.prisma.device({ id }).deviceTypeCategory()
+    },
 };
