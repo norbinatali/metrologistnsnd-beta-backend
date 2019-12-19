@@ -16,6 +16,7 @@ export const device = {
             category: category,
             module: module,
             tr:{connect: {id: ctx.request.prisma.tR.id}},
+            deviceTypeCategory:{connect:{id:ctx.request.prisma.deviceTypeCategories.id}},
             author: {
                 connect: {id: userId},
             },
