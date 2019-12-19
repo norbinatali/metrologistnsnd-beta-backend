@@ -47,8 +47,11 @@ export const Query = {
   allDevice(parent, args, ctx: Context) {
     return ctx.prisma.devices({ where: { published: true } })
   },
-  deviceTypeCategories(parent, args, ctx: Context) {
-    return ctx.prisma.deviceTypeCategories()
+ dtcs(parent, args, ctx: Context) {
+    return ctx.prisma.dTCs()
+  },
+  dtc(parent,{id},ctx:Context){
+    return ctx.prisma.dTC({id})
   },
 
 
