@@ -2,11 +2,12 @@ type Query {
   feed: [Post!]!
   drafts: [Post!]!
   trs: [TR!]!
-  deviceTypeCategories: [DeviceTypeCategory!]!
+  dtc(id:ID!):DTC
   post(id: ID!): Post
   newDevice: [Device!]!
   allDevice: [Device!]!
   device(id: ID!): Device
+   dtcs: [DTC!]!
   tr(id:ID!):TR
   me: User
 }
@@ -19,7 +20,7 @@ type Mutation {
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!
   createNewDevice(name_UA: String!, name_EN: String!, module:String!): Device!
-  createNewDeviceTypeCategory(name_TR_EN:String!, name_TR_UA:String!):DeviceTypeCategory!
+  createNewDTC(name_EN:String!, name_UA:String!):DTC!
   publishDevice(id: ID!): Device!
   deleteDevice(id: ID!): Device!
   createNewTR(name_TR_EN:String!, name_TR_UA:String!):TR!
@@ -70,7 +71,7 @@ type Device {
   module:String
   author: User!
   tr:TR!
-  deviceTypeCategory:DeviceTypeCategory!
+ dtc:DTC!
 }
 type TR {
   id:ID!
@@ -78,12 +79,11 @@ type TR {
   name_TR_EN:String!
   device_id:[Device!]!
 }
-type DeviceTypeCategory{
+type DTC{
   id: ID!
-  name_TR_UA:String!
-  name_TR_EN: String!
-  device_id: [Device!]!
-
+  name_UA:String!
+  name_EN: String!
+  device_id:[Device!]!
 }
 type LetterEmail{
   id:ID!
