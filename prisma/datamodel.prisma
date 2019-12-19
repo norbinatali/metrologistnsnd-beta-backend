@@ -33,9 +33,19 @@ type Device {
   category: String!
   module:String
   tr: TR!
+  deviceTypeCategory: DeviceTypeCategory!
   author: User!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+
+}
+type DeviceTypeCategory{
+id: ID! @id
+name_TR_UA:String!
+name_TR_EN: String!
+device_id: [Device!]!
+createdAt: DateTime! @createdAt
+updatedAt: DateTime! @updatedAt
 
 }
 
