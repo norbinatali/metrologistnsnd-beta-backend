@@ -9,7 +9,9 @@ import {Device} from "./Device";
 import {letter} from "./Mutation/letter";
 import {TR} from "./TR";
 import {tr} from "./Mutation/tr";
-import {changeUser} from "./Mutation/changeuser";
+import {DeviceTypeCategory} from "./DeviceTypeCategory";
+import {changeuser} from "./Mutation/changeuser";
+import {devicetypecategory} from "./Mutation/devicetypecategory";
 
 export default {
   Query,
@@ -19,11 +21,13 @@ export default {
     ...device,
     ...letter,
     ...tr,
-    ...changeUser
+    ...changeuser,
+    ...devicetypecategory
   },
   Subscription,
   User,
   Post,
   Device,
-  TR
+  TR,
+  DeviceTypeCategory
 }
