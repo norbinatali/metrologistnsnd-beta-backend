@@ -18,7 +18,7 @@ type Mutation {
   createDraft(title: String!, content: String!): Post!
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!
-  createNewDevice(name: String!, category: String!, module:String!): Device!
+  createNewDevice(name_UA: String!, name_EN: String!, module:String!): Device!
   createNewDeviceTypeCategory(name_TR_EN:String!, name_TR_UA:String!):DeviceTypeCategory!
   publishDevice(id: ID!): Device!
   deleteDevice(id: ID!): Device!
@@ -66,8 +66,7 @@ type Device {
   published: Boolean!
   name_EN: String!
   name_UA: String!
-  name_RUS: String!
-  category: String!
+  name_RUS: String
   module:String
   author: User!
   tr:TR!
