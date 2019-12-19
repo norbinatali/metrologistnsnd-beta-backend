@@ -29,8 +29,7 @@ type Device {
   published: Boolean! @default(value: false)
   name_EN: String!
   name_UA: String!
-  name_RUS:String!
-  category: String!
+  name_RUS:String
   module:String
   tr: TR!
   deviceTypeCategory: DeviceTypeCategory!
