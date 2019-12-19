@@ -47,6 +47,10 @@ export const Query = {
   allDevice(parent, args, ctx: Context) {
     return ctx.prisma.devices({ where: { published: true } })
   },
+  deviceTypeCategories(parent, args, ctx: Context) {
+    return ctx.prisma.deviceTypeCategories()
+  },
+
 
   newDevice(parent, args, ctx: Context) {
     const id = getUserId(ctx);
