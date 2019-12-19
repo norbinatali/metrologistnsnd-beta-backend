@@ -32,21 +32,22 @@ type Device {
   name_RUS:String
   module:String
   tr: TR!
-  deviceTypeCategory: DeviceTypeCategory!
+  dtc: DTC!
   author: User!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 
 }
-type DeviceTypeCategory{
+type DTC{
 id: ID! @id
-name_TR_UA:String!
-name_TR_EN: String!
+name_UA: String!
+name_EN: String!
 device_id: [Device!]!
 createdAt: DateTime! @createdAt
 updatedAt: DateTime! @updatedAt
 
 }
+
 
 type TR{
 id: ID! @id
