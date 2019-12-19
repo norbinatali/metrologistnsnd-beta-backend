@@ -36,7 +36,7 @@ function getHashedPassword(value: string) {
 }
 
 
-export const changeUser= {
+export const changeuser= {
 
     async upgradeUser(_, {email, password, name}, ctx: Context) {
         const userUp = await ctx.prisma.user({email});
