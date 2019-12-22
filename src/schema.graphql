@@ -8,6 +8,7 @@ type Query {
   allDevice: [Device!]!
   device(id: ID!): Device
    dtcs: [DTC!]!
+   dtcL(id: ID!): [DTC!]!
   tr(id:ID!):TR
   me: User
 }
