@@ -50,6 +50,9 @@ export const Query = {
  dtcs(parent, args, ctx: Context) {
     return ctx.prisma.dTCs()
   },
+  dtcL(parent, {id}, ctx: Context) {
+    return ctx.prisma.dTCs({where:{id}})
+  },
   dtc(parent,{id},ctx:Context){
     return ctx.prisma.dTC({id})
   },
