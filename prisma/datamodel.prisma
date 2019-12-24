@@ -16,6 +16,7 @@ type User {
   companyName:String
   country:String
   posts: [Post!]!
+   mydevices: [MyDevice!]!
   devices: [Device!]!
   emailConfirmed: Boolean!
   emailConfirmToken:String!
