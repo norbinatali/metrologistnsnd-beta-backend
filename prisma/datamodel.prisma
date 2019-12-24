@@ -14,6 +14,7 @@ type User {
   password: String!
   name: String!
   companyName:String
+  country:String
   posts: [Post!]!
   devices: [Device!]!
   emailConfirmed: Boolean!
@@ -68,4 +69,16 @@ text: String!
 enum Role{
 ADMIN
 CUSTOMER
+}
+type MyDevice{
+id: ID! @id
+brand_device: String!
+type_device: String!
+module_device: String!
+verification_device:String
+notes:String
+author: User!
+calibration: DateTime
+next_calibration: DateTime
+createdAt: DateTime! @createdAt
 }
