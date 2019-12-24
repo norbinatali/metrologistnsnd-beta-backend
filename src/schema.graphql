@@ -10,20 +10,25 @@ type Query {
    dtcs: [DTC!]!
    dtcL(id: ID!): [DTC!]!
   tr(id:ID!):TR
+  allmydevices:[MyDevice!]!
+  mydevice: MyDevice
   me: User
 }
 
 type Mutation {
-  signup(email: String!, password: String!, name: String!, companyName:String): AuthPayload!
+  signup(email: String!, password: String!, name: String!, companyName:String,country:String): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
   upgradeUser(email:String, password:String, name:String, companyName:String):User!
   createDraft(title: String!, content: String!): Post!
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!
   createNewDevice(name_UA: String!, name_EN: String!, module:String!): Device!
+  createNewMyDevice(brand_device: String!, type_device:String!, module_device:String!,notes:String, verification_device:String, calibration:Date, next_calibration:Date): MyDevice!
   createNewDTC(name_EN:String!, name_UA:String!):DTC!
   publishDevice(id: ID!): Device!
+  publishMyDevice(id: ID!): MyDevice!
   deleteDevice(id: ID!): Device!
+    deleteMyDevice(id: ID!): MyDevice!
   createNewTR(name_TR_EN:String!, name_TR_UA:String!):TR!
     createNewLetter(from:String!, subject:String!, text:String!):LetterEmail!
     passwordReset( email:String!,resetToken: String!, password: String!):User!
@@ -47,6 +52,8 @@ type User {
   email: String!
   name: String!
   companyName:String
+  country:String
+  mydevices: [MyDevice!]!
   posts: [Post!]!
   devices: [Device!]!
   role: Role!
@@ -106,4 +113,15 @@ input SignupInput {
   password: String!
   name: String!
   companyName:String
+}
+type MyDevice{
+  id: ID!
+  brand_device: String!
+  type_device: String!
+  module_device: String!
+  notes:String
+  verification_device:String
+  author: User!
+  calibration: Date
+  next_calibration: Date
 }
