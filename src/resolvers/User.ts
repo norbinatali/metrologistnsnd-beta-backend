@@ -7,4 +7,7 @@ export const User = {
   devices: ({ id }, args, ctx: Context) => {
     return ctx.prisma.user({ id }).devices()
   },
+  mydevices: ({ id }, args, ctx: Context) => {
+    return ctx.prisma.user({ id }).mydevices()
+  },
 };
