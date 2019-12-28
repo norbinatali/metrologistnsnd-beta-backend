@@ -10,8 +10,8 @@ createNewMyDevice: async function (parent, {brand_device,type_device, calibratio
         module_device: module_device,
         notes:notes,
         verification_device:verification_device,
-        calibration: calibration,
-        next_calibration: next_calibration,
+        calibration: new Date(),
+        next_calibration: new Date(),
         author:{connect:{id: userId}}
 
     })
