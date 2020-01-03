@@ -79,7 +79,7 @@ module_device: String!
 verification_device:String
 notes:String
 author: User!
-calibration: DateTime
-next_calibration: DateTime
+calibration: String
+next_calibration: String
 createdAt: DateTime! @createdAt
 }
