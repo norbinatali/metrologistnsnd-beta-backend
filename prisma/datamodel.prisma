@@ -73,10 +73,19 @@ CUSTOMER
 }
 type MyDevice{
 id: ID! @id
+name_device: String!
 brand_device: String!
-type_device: String!
-module_device: String!
-verification_device:String
+series_device: String!
+type_device: String
+certification_calibration:String
+certification_verification:String
+certification_conformity:String
+module_device: String
+certification_number:String
+department_center:String
+conformity_data:String
+next_conformity:String
+valid_verification:String
 notes:String
 author: User!
 calibration: String
