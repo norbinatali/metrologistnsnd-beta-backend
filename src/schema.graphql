@@ -1,4 +1,4 @@
-0scalar Date
+scalar Date
 type Query {
   feed: [Post!]!
   drafts: [Post!]!
