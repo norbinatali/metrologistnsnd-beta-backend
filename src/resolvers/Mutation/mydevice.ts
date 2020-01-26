@@ -2,25 +2,27 @@ import {getUserId, Context, getTRId} from '../../utils'
 
 
 export const mydevice={
-createNewMyDevice: async function (parent, {conformity_data, name_device,series_device,brand_device,type_device,certification_conformity,certification_number, certification_calibration,department_center,notes,certification_verification, next_conformity,next_calibration, module_device, valid_verification, calibration}, ctx: Context, info){
+createNewMyDevice: async function (parent, {name_device,brand_device,series_device,kind_device,certificate_calibration,certificate_verification,certificate_conformity,module_device,tr_device,certificate_assessment_number,certificate_verification_number,certificate_calibration_number,department_assessment_center,department_verification_center,department_calibration_center,conformity_data,calibration_data,valid_verification,notes}, ctx: Context, info){
         const userId = getUserId(ctx);
         return ctx.prisma.createMyDevice({
             name_device: name_device,
-            certification_calibration:certification_calibration,
-            certification_verification:certification_verification,
-            certification_conformity:certification_conformity,
-            brand_device: brand_device,
-            type_device:  type_device,
+            brand_device:brand_device,
             series_device:series_device,
-            module_device: module_device,
-            notes:notes,
-            certification_number:certification_number,
+            kind_device:kind_device,
+            certificate_calibration:certificate_calibration,
+            certificate_verification:certificate_verification,
+            certificate_conformity:certificate_conformity,
+            certificate_assessment_number:certificate_assessment_number,
+            certificate_calibration_number:certificate_calibration_number,
+            certificate_verification_number:certificate_verification_number,
+            module_device:module_device,
+            tr_device:tr_device,
+            department_assessment_center:department_assessment_center,
+            department_calibration_center:department_calibration_center,
+            department_verification_center:department_verification_center,
+            calibration_data:calibration_data,
             conformity_data:conformity_data,
-            department_center:department_center,
-            next_conformity:next_conformity,
-            next_calibration: next_calibration,
-            valid_verification: valid_verification,
-            calibration: calibration,
+            valid_verification:valid_verification,
             author:{connect:{id: userId}}
 
         })
