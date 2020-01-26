@@ -76,19 +76,23 @@ id: ID! @id
 name_device: String!
 brand_device: String!
 series_device: String!
-type_device: String
-certification_calibration:String
-certification_verification:String
-certification_conformity:String
+kind_device: String
+certificate_calibration:Boolean
+certificate_verification:Boolean
+certificate_conformity:Boolean
 module_device: String
-certification_number:String
-department_center:String
+tr_device:String
+certificate_assessment_number:String
+certificate_verification_number:String
+certificate_calibration_number:String
+department_assessment_center:String
+department_verification_center:String
+department_calibration_center:String
 conformity_data:String
-next_conformity:String
+calibration_data:String
 valid_verification:String
 notes:String
 author: User!
-calibration: String
-next_calibration: String
 createdAt: DateTime! @createdAt
+}
 }
