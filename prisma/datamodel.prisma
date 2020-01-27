@@ -89,9 +89,9 @@ certificate_calibration_number:String
 department_assessment_center:String
 department_verification_center:String
 department_calibration_center:String
-conformity_data:String
-calibration_data:String
-valid_verification:String
+conformity_data:DateTime
+calibration_data:DateTime
+valid_verification:DateTime
 notes:String
 author: User!
 createdAt: DateTime! @createdAt
