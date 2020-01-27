@@ -24,7 +24,7 @@ type Mutation {
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!
   createNewDevice(name_UA: String!, name_EN: String!,category:String!, module:String!): Device!
-  createNewMyDevice(name_device: String!,brand_device: String!,series_device: String!,kind_device: String!,certificate_calibration:Boolean,certificate_verification:Boolean,certificate_conformity:Boolean,module_device: String,tr_device:String,certificate_assessment_number:String,certificate_verification_number:String,certificate_calibration_number:String, department_assessment_center:String,department_verification_center:String,department_calibration_center:String,conformity_data:String,calibration_data:String,valid_verification:String,notes:String,calibration: String,next_calibration: String): MyDevice!
+  createNewMyDevice(name_device: String!,brand_device: String!,series_device: String!,kind_device: String!,certificate_calibration:Boolean,certificate_verification:Boolean,certificate_conformity:Boolean,module_device: String,tr_device:String,certificate_assessment_number:String,certificate_verification_number:String,certificate_calibration_number:String, department_assessment_center:String,department_verification_center:String,department_calibration_center:String,conformity_data:Date,calibration_data:Date,valid_verification:Date,notes:String,calibration: String,next_calibration: String): MyDevice!
   createNewDTC(name_EN:String!, name_UA:String!):DTC!
   publishDevice(id: ID!): Device!
   publishMyDevice(id: ID!): MyDevice!
@@ -133,9 +133,9 @@ type MyDevice{
   department_assessment_center:String
   department_verification_center:String
   department_calibration_center:String
-  conformity_data:String
-  calibration_data:String
-  valid_verification:String
+  conformity_data:Date
+  calibration_data:Date
+  valid_verification:Date
   notes:String
   author: User!
 }
