@@ -19,7 +19,7 @@ type Query {
 type Mutation {
   signup(email: String!, password: String!, name: String!, companyName:String,country:String): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
-  upgradeUser(email:String, password:String, name:String, companyName:String):User!
+  upgradeUser(email:String, password:String, name:String, companyName:String, country:String):User!
   createDraft(title: String!, content: String!): Post!
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!
