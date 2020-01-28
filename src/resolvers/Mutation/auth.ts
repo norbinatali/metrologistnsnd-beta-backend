@@ -110,7 +110,9 @@ export const auth = {
       throw new InvalidEmailError()
     }
     const valid = await bcrypt.compare(password, user.password);
-    
+    if (!valid) {
+      throw new Error('Invalid password')
+    }
     if (
         user.emailConfirmed == false
     ) {
