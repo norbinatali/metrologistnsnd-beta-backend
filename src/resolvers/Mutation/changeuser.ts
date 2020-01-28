@@ -38,13 +38,15 @@ function getHashedPassword(value: string) {
 
 export const changeuser= {
 
-    async upgradeUser(_, {email, password, name}, ctx: Context) {
+    async upgradeUser(_, {email, password, name, companyName, country}, ctx: Context) {
         const userUp = await ctx.prisma.user({email});
         if (!userUp) {
             throw new Error(`No such user found for email: ${email}`)
         } else {
             userUp.password = password;
             userUp.name = name;
+            userUp.companyName=companyName;
+            userUp.country=country;
             return userUp;
         }
     },
