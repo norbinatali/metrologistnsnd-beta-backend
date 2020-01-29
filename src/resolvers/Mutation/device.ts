@@ -16,9 +16,7 @@ export const device = {
             module: module,
             tr:{connect: {id: ctx.request.prisma.tR.id}},
              dtc:{connect:{id:ctx.request.prisma.dTC.id}},
-            author: {
-                connect: {id: userId},
-            },
+           
         })
     },
 
