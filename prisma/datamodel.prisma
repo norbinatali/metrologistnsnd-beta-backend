@@ -32,11 +32,10 @@ type Device {
   name_EN: String!
   name_UA: String!
   name_RUS:String
-  category: String!
   module:String
   tr: TR!
   dtc: DTC!
-  author: User!
+  author: User
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 
