@@ -78,7 +78,6 @@ type Device {
   name_UA: String!
   name_RUS: String
   module:String
-  author: User
   tr:TR!
  dtc:DTC!
 }
