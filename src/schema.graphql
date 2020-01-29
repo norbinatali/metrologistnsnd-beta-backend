@@ -56,7 +56,6 @@ type User {
   country:String
   mydevices: [MyDevice!]!
   posts: [Post!]!
-  devices: [Device!]!
   role: Role!
     emailConfirmed: Boolean!
     emailConfirmToken: String
