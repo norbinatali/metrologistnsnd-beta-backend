@@ -22,13 +22,7 @@ export const device = {
 
     async publishDevice(parent, { id }, ctx: Context, info) {
         const userId = getUserId(ctx);
-        const postExists = await ctx.prisma.$exists.device({
-            id,
-            author: { id: userId },
-        });
-        if (!postExists) {
-            throw new Error(`Post not found or you're not the author`)
-        }
+   
 
         return ctx.prisma.updateDevice({
             where: { id },
@@ -38,13 +32,7 @@ export const device = {
 
     async deleteDevice(parent, { id }, ctx: Context, info) {
         const userId = getUserId(ctx)
-        const postExists = await ctx.prisma.$exists.device({
-            id,
-            author: { id: userId },
-        });
-        if (!postExists) {
-            throw new Error(`Post not found or you're not the author`)
-        }
+      
 
         return ctx.prisma.deleteDevice({ id })
     },
