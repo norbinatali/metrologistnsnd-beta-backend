@@ -29,8 +29,8 @@ export const auth = {
      if (args.name==="") {
       throw new Error('no name provided');
     }
-     const user = await ctx.prisma.user({ email});
-    if (args.email = user) {
+     const userEmail = await ctx.prisma.user({ email});
+    if ( userEmail === args.email) {
       throw new Error('The user is exist. Користувач вже існує ');
     }
     
