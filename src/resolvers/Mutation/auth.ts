@@ -63,7 +63,10 @@ export const auth = {
 
         },
         function (err, info, response) {
-          console.log(user.email);
+         console.log(user.email);
+          console.log('Successful in sending email');
+          console.dir({success: true, existing: false, sendError: false});
+          console.dir(response);
           if(err)
             console.log(err);
           else
