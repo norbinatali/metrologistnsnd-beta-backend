@@ -45,6 +45,8 @@ export const auth = {
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       secure: true,
+       type: "SMTP",
+  host: "smtp.gmail.com",
       auth: {
         user: 'metrologistnsnd@gmail.com',
         pass: 'NataliBear3'
