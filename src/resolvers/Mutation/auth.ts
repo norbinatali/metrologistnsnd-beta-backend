@@ -44,9 +44,11 @@ export const auth = {
 
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
-      secure: true,
+       host: "smtp.gmail.com",
        type: "SMTP",
-  host: "smtp.gmail.com",
+       secure: true,
+       port: 465,
+ 
       auth: {
         user: 'metrologistnsnd@gmail.com',
         pass: 'NataliBear3'
