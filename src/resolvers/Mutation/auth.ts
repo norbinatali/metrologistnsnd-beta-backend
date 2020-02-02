@@ -19,7 +19,7 @@ import {
 } from '../../errors';
 
 export const auth = {
-  aasync signup(parent, args, ctx: Context) {
+  async signup(parent, args, ctx: Context) {
     if (args.password==="" ) {
       throw new Error('no password provided');
     }
