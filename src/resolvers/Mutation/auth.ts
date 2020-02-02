@@ -42,13 +42,13 @@ export const auth = {
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: 'metrologistnsnd@gmail.com',
+        user: 'norbinatali@gmail.com',
         pass: 'NataliBear3'
       }
     });
     transporter.sendMail({
           template: 'confirmEmail',
-          from:"metrologistnsnd@gmail.com",
+          from:"norbinatali@gmail.com",
           to:user.email,
           subject: `Confirm your email on Metrologist`,
           text: "Hi,\n" +
