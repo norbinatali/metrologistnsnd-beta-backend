@@ -21,10 +21,12 @@ type User {
   emailConfirmed: Boolean!
   emailConfirmToken:String!
   role: Role! @default(value: CUSTOMER)
+
   resetToken: String
   resetExpires: DateTime
   lastLogin: DateTime
     joinedAt: DateTime!
+    teams:[Team!]!
 }
 type Device {
   id: ID! @id
@@ -38,7 +40,6 @@ type Device {
   author: User
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-
 }
 type DTC{
 id: ID! @id
@@ -70,6 +71,7 @@ text: String!
 enum Role{
 ADMIN
 CUSTOMER
+TEAM
 }
 type MyDevice{
 id: ID! @id
@@ -95,4 +97,27 @@ notes:String
 author: User!
 createdAt: DateTime! @createdAt
 }
+type Team{
+    id: ID! @id
+    name:String! @unique
+    author:User!
+    teamMembers:[TeamMembers!]!
+    payment:Boolean
+    role:Role! @default(value: TEAM)
+}
+
+type TeamMembers{
+id: ID! @id
+emailMembers:String! @unique
+member:Members! @default(value: MEMBER1)
+memberConfirmed:Boolean
+memberConfirmToken:String
+team:Team!
+}
+enum Members{
+MEMBER1
+MEMBER2
+MEMBER3
+MEMBER4
+MEMBER5
 }
