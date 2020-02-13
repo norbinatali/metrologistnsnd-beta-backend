@@ -1,138 +1,172 @@
 scalar Date
 type Query {
-  feed: [Post!]!
-  drafts: [Post!]!
-  trs: [TR!]!
-  dtc(id:ID!):DTC
-  post(id: ID!): Post
-  newDevice: [Device!]!
-  allDevice: [Device!]!
-  device(id: ID!): Device
-   dtcs: [DTC!]!
-   dtcL(id: ID!): [DTC!]!
-  tr(id:ID!):TR
-  allmydevices:[MyDevice!]!
-  mydevice: MyDevice
-  me: User
+    feed: [Post!]!
+    drafts: [Post!]!
+    trs: [TR!]!
+    dtc(id:ID!):DTC
+    post(id: ID!): Post
+    newDevice: [Device!]!
+    allDevice: [Device!]!
+    device(id: ID!): Device
+    dtcs: [DTC!]!
+    dtcL(id: ID!): [DTC!]!
+    tr(id:ID!):TR
+    allmydevices:[MyDevice!]!
+    draftsDevice:[Device!]!
+    mydevice: MyDevice
+    allTeams(id:ID!):Team
+    allTeamMembers(id:ID!):TeamMembers
+    me: User
 }
 
 type Mutation {
-  signup(email: String!, password: String!, name: String!, companyName:String,country:String): AuthPayload!
-  login(email: String!, password: String!): AuthPayload!
-  upgradeUser(email:String!, name:String, companyName:String, country:String):User!
-  createDraft(title: String!, content: String!): Post!
-  publish(id: ID!): Post!
-  deletePost(id: ID!): Post!
-  createNewDevice(name_UA: String!, name_EN: String!, module:String!): Device!
-  createNewMyDevice(name_device: String!,brand_device: String!,series_device: String!,kind_device: String!,certificate_calibration:Boolean,certificate_verification:Boolean,certificate_conformity:Boolean,module_device: String,tr_device:String,certificate_assessment_number:String,certificate_verification_number:String,certificate_calibration_number:String, department_assessment_center:String,department_verification_center:String,department_calibration_center:String,conformity_data:Date,calibration_data:Date,valid_verification:Date,notes:String,calibration: String,next_calibration: String): MyDevice!
-  createNewDTC(name_EN:String!, name_UA:String!):DTC!
-  publishDevice(id: ID!): Device!
-  publishMyDevice(id: ID!): MyDevice!
-  deleteDevice(id: ID!): Device!
+    signup(email: String!, password: String!, name: String!, companyName:String,country:String): AuthPayload!
+    login(email: String!, password: String!): AuthPayload!
+    upgradeUser(email:String!, name:String, companyName:String, country:String):User!
+    createDraft(title: String!, content: String!): Post!
+    publish(id: ID!): Post!
+    deletePost(id: ID!): Post!
+    createNewDevice(name_UA: String!, name_EN: String!, module:String!): Device!
+    createNewMyDevice(name_device: String!,brand_device: String!,series_device: String!,kind_device: String!,certificate_calibration:Boolean,certificate_verification:Boolean,certificate_conformity:Boolean,module_device: String,tr_device:String,certificate_assessment_number:String,certificate_verification_number:String,certificate_calibration_number:String, department_assessment_center:String,department_verification_center:String,department_calibration_center:String,conformity_data:Date,calibration_data:Date,valid_verification:Date,notes:String,calibration: String,next_calibration: String): MyDevice!
+    createNewDTC(name_EN:String!, name_UA:String!):DTC!
+    publishDevice(id: ID!): Device!
+    publishMyDevice(id: ID!): MyDevice!
+    deleteDevice(id: ID!): Device!
     deleteMyDevice(id: ID!): MyDevice!
-  createNewTR(name_TR_EN:String!, name_TR_UA:String!):TR!
+    createNewTR(name_TR_EN:String!, name_TR_UA:String!):TR!
     createNewLetter(from:String!, subject:String!, text:String!):LetterEmail!
     passwordReset( email:String!,resetToken: String!, password: String!):User!
-  changePassword(oldpassword:String!, newpassword:String!, email:String):User!
-  triggerPasswordReset(email: String!): TriggerPasswordResetPayload!
-  confirmEmail(email: String!, emailConfirmToken: String!): AuthPayload!
-
+    changePassword(oldpassword:String!, newpassword:String!, email:String):User!
+    triggerPasswordReset(email: String!): TriggerPasswordResetPayload!
+    confirmEmail(email: String!, emailConfirmToken: String!): AuthPayload!
+    createTeam(name:String!):Team!
+    teamUser(id:ID!):Team!
+    deleteTeam(id:ID!):Team!
+    createTeamMembers(emailMembers:String!):TeamMembers!
+    confirMemberEmail(emailMembers:String!, memberConfirmToken:String!):TeamMembers!
+    deleteTeamMembers(id:ID):TeamMembers!
 }
 
 type Subscription {
-  feedSubscription: Post
+    feedSubscription: Post
 }
 
 type AuthPayload {
-  token: String!
-  user: User!
+    token: String!
+    user: User!
 }
 
 type User {
-  id: ID!
-  email: String!
-  name: String!
-  companyName:String
-  country:String
-  mydevices: [MyDevice!]!
-  posts: [Post!]!
-  role: Role!
+    id: ID!
+    email: String!
+    name: String!
+    companyName:String
+    country:String
+    mydevices: [MyDevice!]!
+    posts: [Post!]!
+    role: Role!
     emailConfirmed: Boolean!
     emailConfirmToken: String
     resetToken: String!
+    teams:[Team!]!
 
 }
 
 type Post {
-  id: ID!
-  published: Boolean!
-  title: String!
-  content: String!
-  author: User!
+    id: ID!
+    published: Boolean!
+    title: String!
+    content: String!
+    author: User!
 }
 type Device {
-  id: ID!
-  published: Boolean!
-  name_EN: String!
-  name_UA: String!
-  name_RUS: String
-  module:String
-  tr:TR!
- dtc:DTC!
+    id: ID!
+    published: Boolean!
+    name_EN: String!
+    name_UA: String!
+    name_RUS: String
+    module:String
+    tr:TR!
+    dtc:DTC!
 }
 type TR {
-  id:ID!
-  name_TR_UA:String!
-  name_TR_EN:String!
-  device_id:[Device!]!
+    id:ID!
+    name_TR_UA:String!
+    name_TR_EN:String!
+    device_id:[Device!]!
 }
 type DTC{
-  id: ID!
-  name_UA:String!
-  name_EN: String!
-  device_id:[Device!]!
+    id: ID!
+    name_UA:String!
+    name_EN: String!
+    device_id:[Device!]!
 }
 type LetterEmail{
-  id:ID!
-  from:String!
-  subject:String!
-  text:String!
+    id:ID!
+    from:String!
+    subject:String!
+    text:String!
 }
 enum Role{
-  ADMIN
-  CUSTUMER
+    ADMIN
+    CUSTUMER
+    TEAM
 }
 type TriggerPasswordResetPayload {
-ok: Boolean
+    ok: Boolean
 
-  resetToken: String!
+    resetToken: String!
 }
 input SignupInput {
-  email: String!
-  password: String!
-  name: String!
-  companyName:String
+    email: String!
+    password: String!
+    name: String!
+    companyName:String
 }
 type MyDevice{
- id: ID!
-  name_device: String!
-  brand_device: String!
-  series_device: String!
-  kind_device: String
-  certificate_calibration:Boolean
-  certificate_verification:Boolean
-  certificate_conformity:Boolean
-  module_device: String
-  tr_device:String
-  certificate_assessment_number:String
-  certificate_verification_number:String
-  certificate_calibration_number:String
-  department_assessment_center:String
-  department_verification_center:String
-  department_calibration_center:String
-  conformity_data:Date
-  calibration_data:Date
-  valid_verification:Date
-  notes:String
-  author: User!
+    id: ID!
+    name_device: String!
+    brand_device: String!
+    series_device: String!
+    kind_device: String
+    certificate_calibration:Boolean
+    certificate_verification:Boolean
+    certificate_conformity:Boolean
+    module_device: String
+    tr_device:String
+    certificate_assessment_number:String
+    certificate_verification_number:String
+    certificate_calibration_number:String
+    department_assessment_center:String
+    department_verification_center:String
+    department_calibration_center:String
+    conformity_data:Date
+    calibration_data:Date
+    valid_verification:Date
+    notes:String
+    author: User!
+}
+type Team{
+    id: ID!
+    name:String!
+    author:User!
+    teamMembers:[TeamMembers!]!
+    payment:Boolean
+    role:Role!
+}
+
+type TeamMembers{
+    id: ID!
+    team:Team!
+    emailMembers:String!
+    member:Members!
+    memberConfirmed:Boolean
+    memberConfirmToken:String!
+}
+enum Members{
+    MEMBER1
+    MEMBER2
+    MEMBER3
+    MEMBER4
+    MEMBER5
 }
