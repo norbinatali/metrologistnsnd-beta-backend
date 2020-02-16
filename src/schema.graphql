@@ -17,6 +17,7 @@ type Query {
     allTeams(id:ID!):Team
     allTeamMembers(id:ID!):TeamMembers
     me: User
+    myDevice(id:ID!):MyDevice
 }
 
 type Mutation {
