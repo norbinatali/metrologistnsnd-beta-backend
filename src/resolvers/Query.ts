@@ -74,4 +74,30 @@ export const Query = {
   device(parent, { id }, ctx: Context) {
     return ctx.prisma.device({ id })
   },
+   async myDevice(parent, { id }, ctx: Context){
+        const userId = getUserId(ctx);
+        const requestingUserIsAuthor = await ctx.prisma.$exists.myDevice({
+            id,
+            author: {
+                id: userId,
+            },
+        });
+        const requestingUserIsAdmin = await ctx.prisma.$exists.user({
+            id: userId,
+            role: 'CUSTOMER',
+        });
+
+        if (requestingUserIsAdmin || requestingUserIsAuthor) {
+
+            if(ctx.prisma.myDevices({where:{id}})){
+
+            }
+            return ctx.prisma.myDevice({ id } )
+        }
+        throw new Error(
+            'Invalid permissions, you must be an admin or the author of this post to retrieve it.',
+        )
+
+
+    }
 };
