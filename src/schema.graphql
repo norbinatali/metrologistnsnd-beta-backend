@@ -46,6 +46,9 @@ type Mutation {
     createTeamMembers(emailMembers:String!):TeamMembers!
     confirMemberEmail(emailMembers:String!, memberConfirmToken:String!):TeamMembers!
     deleteTeamMembers(id:ID):TeamMembers!
+    createNewAppointment(title:String,start_date:DateTime, end_date:DateTime, location:String,notes:String):Appointments!
+  deleteAppointment(id:ID):Appointments!
+  createNewTeam(name:String, payment:Boolean):Team!
 }
 
 type Subscription {
@@ -70,7 +73,7 @@ type User {
     emailConfirmToken: String
     resetToken: String!
     teams:[Team!]!
-
+appointments:[Appointments!]!
 }
 
 type Post {
@@ -170,4 +173,13 @@ enum Members{
     MEMBER3
     MEMBER4
     MEMBER5
+}
+type Appointments {
+  id: ID!
+  title:String
+  start_date:DateTime
+  end_date:DateTime
+  location:String
+  notes:String
+  author:User!
 }
