@@ -14,6 +14,9 @@ import {dtc} from "./Mutation/dtc";
 import {DTC} from "./DTC";
 import {mydevice} from "./Mutation/mydevice";
 import {MyDevice} from "./MyDevice";
+import {appointment} from "./Mutation/appointment";
+import {team} from "./Mutation/team";
+import {Appointments} from "./Appointment";
 
 export default {
   Query,
@@ -25,7 +28,9 @@ export default {
     ...tr,
     ...changeuser,
    ...dtc,
-    ...mydevice
+    ...mydevice,
+    ...appointment,
+    ...team
    
   },
   Subscription,
@@ -34,5 +39,6 @@ export default {
   Device,
   TR,
   DTC,
-  MyDevice
+  MyDevice,
+  Appointments,
 }
