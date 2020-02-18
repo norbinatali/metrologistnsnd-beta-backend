@@ -18,6 +18,7 @@ type User {
   posts: [Post!]!
    mydevices: [MyDevice!]!
   devices: [Device!]!
+  appointments:[Appointments!]!
   emailConfirmed: Boolean!
   emailConfirmToken:String!
   role: Role! @default(value: CUSTOMER)
@@ -120,4 +121,13 @@ MEMBER2
 MEMBER3
 MEMBER4
 MEMBER5
+}
+type Appointments {
+id: ID! @id
+title:String
+start_date:DateTime
+end_date:DateTime
+location:String
+notes:String
+author:User!
 }
