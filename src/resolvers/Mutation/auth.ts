@@ -50,8 +50,9 @@ export const auth = {
       service: 'Gmail',
        host: "smtp.gmail.com",
        type: "SMTP",
-       secure: true,
-       port: 465,
+       secure: false,
+       port: 587,
+      debug:true,
  
       auth: {
         user: 'metrologistnsnd@gmail.com',
