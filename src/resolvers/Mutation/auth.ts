@@ -68,7 +68,7 @@ export const auth = {
           text: "Hi,\n" +
               "You sign up on Metrologist. Confirm your email:\n" +
               "\n" +
-              'http://metrologistnsnd-beta-frontend.herokuapp.com/confirm-email?email='+user.email+'&emailConfirmToken='+emailConfirmToken+ '\n',
+              'https://metrologistnsnd-beta-frontend.herokuapp.com/confirm-email?email='+user.email+'&emailConfirmToken='+emailConfirmToken+ '\n',
 
         },
         function (err, info, response) {
