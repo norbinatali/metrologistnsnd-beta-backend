@@ -18,7 +18,7 @@ const opts = {
 
 methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       preflightContinue: false,
-      optionsSuccessStatus: 204
+      optionsSuccessStatus: 204,
 
     origin: ["https://metrologistnsnd-beta-frontend.herokuapp.com/"] // your frontend url.
   }
