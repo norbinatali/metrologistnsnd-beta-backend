@@ -20,7 +20,7 @@ methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       preflightContinue: false,
       optionsSuccessStatus: 204
 
-    origin: ["https://metrologistnsnd-beta-frontend.herokuapp.com"] // your frontend url.
+    origin: ["*"] // your frontend url.
   }
 };
 server.start(opts,() => console.log(`Server is running on http://localhost:${opts.port}`));
