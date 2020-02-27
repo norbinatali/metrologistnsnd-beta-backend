@@ -13,8 +13,6 @@ const server = new GraphQLServer({
 })
 const opts = {
   port: 4000,
-  cors: {
-    origin: ["https://metrologistnsnd-beta-frontend.herokuapp.com/"] // your frontend url.
-  }
+ 
 };
 server.start(opts,() => console.log(`Server is running on http://localhost:4000`));
