@@ -11,4 +11,11 @@ const server = new GraphQLServer({
     prisma,
   }),
 })
-server.start(() => console.log(`Server is running on http://localhost:4000`));
+const opts = {
+  port: 4000,
+  cors: {
+    credentials: true,
+    origin: ["https://metrologistnsnd-beta-frontend.herokuapp.com"] // your frontend url.
+  }
+};
+server.start(opts,() => console.log(`Server is running on http://localhost:${opts.port}`));
