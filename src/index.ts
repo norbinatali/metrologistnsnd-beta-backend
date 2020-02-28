@@ -10,11 +10,14 @@ const server = new GraphQLServer({
     resolverValidationOptions: { requireResolversForResolveType: false,},
     prisma,
   }),
-  opt:{
-    cors:{
-    credentials:false}
-  }
+  
   
 })
 
-server.start(opt,() => console.log(`Server is running on http://localhost:4000`));
+server.start({cors: {
+      credentials: true,
+      origin: ["https://metrologistsnd-beta-frontend.herokuapp.com"],
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      preflightContinue: false,
+      optionsSuccessStatus: 204
+    }},() => console.log(`Server is running on http://localhost:4000`));
