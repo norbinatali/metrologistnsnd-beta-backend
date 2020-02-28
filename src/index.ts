@@ -12,7 +12,8 @@ const server = new GraphQLServer({
   }),
   opt:{
     cors:{
-      origin:{['*']}
+      credentails:false, 
+      origin:{['https://metrologistsnd-beta-frontend.herokuapp.com']}
     }
   }
 })
