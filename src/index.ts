@@ -15,7 +15,7 @@ const server = new GraphQLServer({
 })
 
 server.start({cors: {
-      credentials: true,
+      credentials: false,
       origin: ["https://metrologistnsnd-beta-frontend.herokuapp.com"],
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       
