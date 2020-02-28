@@ -10,7 +10,11 @@ const server = new GraphQLServer({
     resolverValidationOptions: { requireResolversForResolveType: false,},
     prisma,
   }),
+  opt:{
+    cors:{
+    credentials:false}
+  }
   
 })
 
-server.start(() => console.log(`Server is running on http://localhost:4000`));
+server.start(opt,() => console.log(`Server is running on http://localhost:4000`));
