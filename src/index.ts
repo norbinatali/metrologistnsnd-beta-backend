@@ -5,7 +5,7 @@ import {ApolloServer} from 'apollo-server'
 import {importSchema} from 'graphql-import'
 
 const server = new ApolloServer({
-  typeDefs: importSchema('/Users/norbinatali/Documents/MetrologistNSND/backend/src/schema.graphql'),
+  typeDefs: importSchema('../src/schema.graphql'),
   resolvers:resolvers,
   context: request => ({
     ...request,
