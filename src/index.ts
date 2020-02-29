@@ -16,7 +16,7 @@ const server = new ApolloServer({
 
 
 server.listen({
-  port: 4000, cors: {
+ 4000, cors: {
     credentials: true,
     origin: ["https://metrologistnsnd-beta-frontend.herokuapp.com"],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
