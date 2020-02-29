@@ -15,7 +15,7 @@ const server = new ApolloServer({
 });
 
 
-server.listen(4000,{
+server.listen({
   cors: {
     credentials: true,
     origin: ["https://metrologistnsnd-beta-frontend.herokuapp.com"],
