@@ -83,7 +83,7 @@ export const auth = {
         });
 
     return {
-      token: jwt.sign({ userId: user.id }, "jwtsecret123"),
+      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
       user,
     }
   },
@@ -111,7 +111,7 @@ export const auth = {
     );
 
     return {
-      token: jwt.sign({ userId: user.id }, "jwtsecret123"),
+      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
       user
     };
   },
@@ -140,7 +140,7 @@ export const auth = {
       throw new UserEmailUnconfirmedError('please confirm your email');
     }
     return {
-      token: jwt.sign({ userId: user.id }, "jwtsecret123"),
+      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
       user,
     }
   },
