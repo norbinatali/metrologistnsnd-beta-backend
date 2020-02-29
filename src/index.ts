@@ -10,15 +10,14 @@ const server = new ApolloServer({
     origin: ["https://metrologistnsnd-beta-frontend.herokuapp.com"],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
   },
+introspection: true,
+  playground: true,
   typeDefs: importSchema('./src/schema.graphql'),
   resolvers,
   context: request => ({
     ...request,
     resolverValidationOptions: { requireResolversForResolveType: false,},
     prisma,
-
-introspection: true,
-  playground: true,
 
   }),
 });
