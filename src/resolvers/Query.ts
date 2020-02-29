@@ -40,7 +40,7 @@ export const Query = {
 
   },
 
-  me(parent, args, ctx: Context) {
+  me(parent, args, ctx) {
     const id = getUserId(ctx);
     return ctx.prisma.user({ id })
   },

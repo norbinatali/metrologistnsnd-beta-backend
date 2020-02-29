@@ -3,26 +3,27 @@
   "scripts": {
     "start": "dotenv -- nodemon -e ts,graphql -x ts-node src/index.ts",
     "debug": "dotenv -- nodemon -e ts,graphql -x ts-node --inspect src/index.ts",
-     "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development npm install --only=dev --dev",
+    "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development npm install --only=dev --dev",
     "heroku-postbuild": "export NPM_CONFIG_PRODUCTION=true; export NODE_ENV=production;",
     "rimraf": "./node_modules/rimraf/bin.js",
-     "dev": "node -r dotenv/config",
+    "dev": "node -r dotenv/config",
     "build": "rimraf dist && tsc"
   },
   "dependencies": {
+    "apollo-errors": "latest",
+    "apollo-server": "latest",
     "bcryptjs": "2.4.3",
+    "dotenv": "^8.2.0",
+    "email-templates": "latest",
     "graphql": "^14.5.8",
+    "graphql-binding": "^2.5.2",
     "graphql-sequelize": "^9.3.6",
     "graphql-yoga": "^1.18.3",
-     "graphql-binding": "^2.5.2",
     "jsonwebtoken": "8.5.1",
     "nexus": "^0.11.7",
     "nexus-prisma": "^0.4.1",
     "prisma-client-lib": "^1.34.8",
-    "validator": "latest",
-    "apollo-errors": "latest",
-    "email-templates": "latest",
-     "apollo-server": "latest"
+    "validator": "latest"
   },
   "devDependencies": {
     "@types/bcryptjs": "2.4.2",
