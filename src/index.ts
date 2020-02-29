@@ -16,6 +16,10 @@ const server = new ApolloServer({
     ...request,
     resolverValidationOptions: { requireResolversForResolveType: false,},
     prisma,
+
+introspection: true,
+  playground: true,
+
   }),
 });
 
