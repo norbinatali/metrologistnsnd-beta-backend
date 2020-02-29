@@ -31,7 +31,7 @@ export const teamMembers = {
                 text: "Hi,\n" +
                     "You was added to the Team on Metrologist. Confirm your email:\n" +
                     "\n" +
-                    'http://metrologistnsnd-beta-frontend.herokuapp.com/create-team?email='+member.emailMembers+'&emailConfirmToken='+memberConfirmToken+ '\n',
+                    'https://metrologistnsnd-beta-frontend.herokuapp.com/create-team?email='+member.emailMembers+'&emailConfirmToken='+memberConfirmToken+ '\n',
 
             },
             function (err, info, response) {
@@ -39,7 +39,7 @@ export const teamMembers = {
                 if(err)
                     console.log(err);
                 else
-                    response.redirect('http://metrologistnsnd-beta-frontend.herokuapp.com/');
+                    response.redirect('https://metrologistnsnd-beta-frontend.herokuapp.com/');
             });
         return {
             token: jwt.sign({ memberId: member.id }, "jwtsecret123"),

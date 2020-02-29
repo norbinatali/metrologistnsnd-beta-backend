@@ -79,7 +79,7 @@ export const auth = {
           if(err)
             console.log(err);
           else
-            response.redirect('http://metrologistnsnd-beta-frontend.herokuapp.com/');
+            response.redirect('https://metrologistnsnd-beta-frontend.herokuapp.com/');
         });
 
     return {

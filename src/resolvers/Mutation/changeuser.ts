@@ -137,7 +137,7 @@ console.log(user.email);
             if(err)
                 console.log(err);
             else
-                response.redirect('http://metrologistnsnd-beta-backend.herokuapp.com/reset-password/'+resetToken);
+                response.redirect('https://metrologistnsnd-beta-backend.herokuapp.com/reset-password/'+resetToken);
         });
 
 
