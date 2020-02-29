@@ -1,8 +1,8 @@
 import { GraphQLServer } from 'graphql-yoga'
 import { prisma } from './generated/prisma-client'
 import resolvers from './resolvers'
-
-const server = new GraphQLServer({
+import {ApolloServer} from 'apollo-server'
+const server = new ApolloServer({
   typeDefs: './src/schema.graphql',
   resolvers,
   context: request => ({
