@@ -6,8 +6,8 @@ import {importSchema} from 'graphql-import'
 
 const server = new GraphQLServer({
   
-  typeDefs: importSchema('./src/schema.graphql'),
-  resolvers:resolvers,
+  typeDefs: './src/schema.graphql',
+  resolvers,
   context: request => ({
     ...request,
     resolverValidationOptions: { requireResolversForResolveType: false,},
