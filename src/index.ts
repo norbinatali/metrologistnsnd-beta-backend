@@ -4,9 +4,13 @@ import resolvers from './resolvers'
 import {ApolloServer} from 'apollo-server'
 import {importSchema} from 'graphql-import'
 
-const server = new GraphQLServer({
-  
-  typeDefs: './src/schema.graphql',
+const server = new ApolloServer({
+  cors: {
+    credentials: true,
+    origin: ["https://metrologistnsnd-beta-frontend.herokuapp.com"],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
+  },
+  typeDefs: importSchema('./src/schema.graphql'),
   resolvers,
   context: request => ({
     ...request,
@@ -16,8 +20,4 @@ const server = new GraphQLServer({
 });
 
 
-server.start({cors: {
-    credentials: true,
-    origin: ["https://metrologistnsnd-beta-frontend.herokuapp.com"],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
-  }},() => console.log(`Server is running on http://localhost:4000`));
+server.listen(()=> console.log(`Server is running on http://localhost:4000`));
