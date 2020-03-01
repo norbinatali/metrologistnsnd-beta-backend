@@ -39,9 +39,6 @@ export const auth = {
     const password = await bcrypt.hash(args.password, 18);
     const emailConfirmToken = uuid();
     const user = await ctx.prisma.createUser({ ...args,password, emailConfirmToken,
-      companyName:args.companyName,
-      country:args.companyName,
-      email:args.email,
       emailConfirmed: false,
         joinedAt: new Date().toISOString()}
       );
