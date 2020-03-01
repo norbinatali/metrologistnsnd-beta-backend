@@ -36,7 +36,7 @@ export const auth = {
    if(userEmail){
       throw new Error("User already exists. Користувач вже існує")
     }
-    const password = await bcrypt.hash(args.password, 18);
+    const password = await bcrypt.hash(args.password, 8);
     const emailConfirmToken = uuid();
     const user = await ctx.prisma.createUser({ ...args,password, emailConfirmToken,
       emailConfirmed: false,
