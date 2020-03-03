@@ -129,7 +129,7 @@ export const changeuser= {
             text: "Hi,\n" +
                 "You requested a password reset on Metrologist.\n" +
                 "\n" +
-                  "https://metrologistnsnd-beta-frontend.herokuapp.com/reset-password/"+resetToken + "\n"+ "Reset my password.",
+                  "http://localhost:3000/reset-password/?email="+user.email+"&resetToken="+resetToken + "\n"+ "Reset my password.",
 
         },
             function (err, info, response) {
@@ -137,7 +137,7 @@ console.log(user.email);
             if(err)
                 console.log(err);
             else
-                response.redirect('https://metrologistnsnd-beta-frontend.herokuapp.com/reset-password/'+resetToken);
+                response.redirect('https://metrologistnsnd-beta-frontend.herokuapp.com/reset-password/';
         });
 
 
