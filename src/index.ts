@@ -4,7 +4,7 @@ import {ApolloServer} from 'apollo-server'
 import {importSchema} from 'graphql-import'
 
 
-
+require('dotenv').config();
 const server = new ApolloServer({
     cors: {
         credentials: true,
