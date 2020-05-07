@@ -99,5 +99,74 @@ export const Query = {
         )
 
 
-    }
+    },
+  async Appointments(parent, { id }, ctx: Context){
+        const userId = getUserId(ctx);
+        const requestingUserIsAuthor = await ctx.prisma.$exists.appointments({
+            id,
+            author: {
+                id: userId,
+            },
+        });
+        const requestingUserIsAdmin = await ctx.prisma.$exists.user({
+            id: userId,
+            role: 'CUSTOMER',
+        });
+
+        if (requestingUserIsAdmin || requestingUserIsAuthor) {
+
+            if(ctx.prisma.appointmentses({where:{id}})){
+
+            }
+            return ctx.prisma.appointments({ id } )
+        }
+        throw new Error(
+            'Invalid permissions, you must be an admin or the author of this post to retrieve it.',
+        )
+
+
+    },
+  async teamList(parent, { id }, ctx: Context){
+
+
+        const membeConfirmedTeam= await ctx.prisma.teamMemberses({where:{memberConfirmed: true}});
+
+
+            return ctx.prisma.team({ id } )
+
+
+
+    },
+       async TeamMembers(parent, { id,emailMembers}, ctx: Context){
+           const teamId =await ctx.prisma.team({id:id});
+          const teamMemberEmail=ctx.prisma.teamMembers({ emailMembers});
+
+          console.log(emailMembers)
+           const userId = getUserId(ctx);
+           const teamMemberExist = await ctx.prisma.$exists.teamMembers({
+               id,
+               team: teamId ,
+
+           });
+           const userExist = await ctx.prisma.$exists.user({
+               id: userId,
+               role: 'CUSTOMER',
+           });
+           if(!userExist){
+               throw new Error('user id not exist ')
+           }
+           const membeConfirmedTeam= await ctx.prisma.teamMemberses({where:{memberConfirmed: true}})
+           if (teamMemberExist || membeConfirmedTeam) {
+
+               if(ctx.prisma.teamMemberses({where:{id}})){
+                   return ctx.prisma.user({ id:userId } ),
+                   ctx.prisma.user({email:emailMembers})
+               }
+               return ctx.prisma.user({ id:userId } ), ctx.prisma.user({email:emailMembers})
+           }
+           throw new Error(
+               'Invalid permissions, you must be an admin or the author of this post to retrieve it.',
+           )
+
+       }
 };
