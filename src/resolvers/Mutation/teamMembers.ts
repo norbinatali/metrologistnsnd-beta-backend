@@ -31,7 +31,7 @@ export const teamMembers = {
                 text: "Hi,\n" +
                     "You was added to the Team on Metrologist. Confirm your email:\n" +
                     "\n" +
-                    'https://metrologistnsnd-beta-frontend.herokuapp.com/create-team?email='+member.emailMembers+'&emailConfirmToken='+memberConfirmToken+ '\n',
+                    'https://metrologistnsnd-beta-frontend.herokuapp.com/create-team?emailMembers='+member.emailMembers+'&emailConfirmToken='+memberConfirmToken+ '\n',
 
             },
             function (err, info, response) {
