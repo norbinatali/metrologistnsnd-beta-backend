@@ -15,10 +15,11 @@ type Query {
     allmydevices:[MyDevice!]!
     draftsDevice:[Device!]!
     mydevice: MyDevice
-    allTeams(id:ID!):Team
-    allTeamMembers(id:ID!):TeamMembers
+    teamList(id:ID!):Team
+    TeamMembers(id:ID!,emailMembers:String):User
     me: User
     myDevice(id:ID!):MyDevice
+    Appointments(id:ID!):Appointments
 }
 
 type Mutation {
