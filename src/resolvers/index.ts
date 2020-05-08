@@ -17,7 +17,9 @@ import {MyDevice} from "./MyDevice";
 import {appointment} from "./Mutation/appointment";
 import {team} from "./Mutation/team";
 import {Appointments} from "./Appointment";
-
+import {teamMembers} from "./Mutation/teamMembers";
+import {Team} from "./Team";
+import {TeamMembers} from "./TeamMembers";
 export default {
   Query,
   Mutation: {
@@ -30,7 +32,9 @@ export default {
    ...dtc,
     ...mydevice,
     ...appointment,
-    ...team
+    ...team,
+     ...teamMembers
+    
    
   },
   Subscription,
@@ -41,4 +45,6 @@ export default {
   DTC,
   MyDevice,
   Appointments,
+  Team,
+  TeamMembers
 }
