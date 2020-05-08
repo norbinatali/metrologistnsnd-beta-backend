@@ -44,3 +44,25 @@ export function findUserByEmail(ctx: Context, email: string, info?: any){
 export function updateUserResetToken(ctx: Context, email:string, data: any){
   return updateUser(ctx, email, data);
 }
+export function findTeamId({id}, ctx:Context) {
+  return ctx.prisma.teams({where: {id}})
+
+}
+export function findTeamMemberId({id}, ctx:Context) {
+  return ctx.prisma.teamMemberses({where: {id}})
+
+}
+export function updateTeam(ctx:Context, email: string, data: any) {
+  const userUp = ctx.prisma.user({email:email});
+  const userId = getUserId(ctx);
+  if (!userUp) {
+    throw new Error(`No such user found for email: ${email}`)
+  } else {
+    return ctx.prisma.updateTeam({where:{author:{id:userId}},data});
+
+  }
+}
+export function updateTeamResetToken(ctx: Context, email:string, data: any){
+  const userId = getUserId(ctx);
+  return updateTeam(ctx, email, data);
+}
