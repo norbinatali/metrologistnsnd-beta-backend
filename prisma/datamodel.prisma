@@ -101,7 +101,7 @@ createdAt: DateTime! @createdAt
 type Team{
     id: ID! @id
     name:String! @unique
-    author:User!
+    author:User
     teamMembers:[TeamMembers!]!
     payment:Boolean
     role:Role! @default(value: TEAM)
