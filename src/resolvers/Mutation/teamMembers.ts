@@ -1,19 +1,37 @@
-import {Context, findTeamByName, getTeamId,getTeamMemberId, getUserId, updateUserResetToken} from "../../utils";
+import {
+    Context,
+    findTeamId,
+    findTeamMemberId,
+    getUserId,
+    updateTeamResetToken,
+    updateUserResetToken
+} from "../../utils";
 import { v4 as uuid } from 'uuid';
 import * as jwt from 'jsonwebtoken'
 const nodemailer = require("nodemailer");
+
 export const teamMembers = {
     async createTeamMembers(parent, args, ctx: Context){
-        console.log(args)
+
         if(args.emailMembers === ""){
             throw new Error('no new member provided');
         }
+        const userTeam=  await ctx.prisma.user({email:args.emailMembers});
+        if(!userTeam){
+            throw new Error('User is not exist. Користувач не існує')
+        }
+
         const memberConfirmToken = uuid();
-        const teamId= getTeamId(ctx);
+
+        const teamId= await ctx.prisma.team({id:args.id});
+
         const member = await ctx.prisma.createTeamMembers({
-            ...args, memberConfirmToken,
+            ...args,
+            emailMembers:args.emailMembers ,
+            member:"MEMBER1",
+            memberConfirmToken,
             memberConfirmed: false,
-            team:{connect:{id:teamId}}
+            team:{connect:{id:teamId.id}}
         });
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
@@ -29,9 +47,9 @@ export const teamMembers = {
                 to:member.emailMembers,
                 subject: `Confirm your email in Team on Metrologist`,
                 text: "Hi,\n" +
-                    "You was added to the Team on Metrologist. Confirm your email:\n" +
+                    "You was added to the Team on Metrologist. Confirm your email in :"+teamId.name+"\n" +
                     "\n" +
-                    'https://metrologistnsnd-beta-frontend.herokuapp.com/create-team?emailMembers='+member.emailMembers+'&emailConfirmToken='+memberConfirmToken+ '\n',
+                    'http://metrologistnsnd-beta-frontend.herokuapp.com/create-team?emailMembers='+member.emailMembers+'&emailConfirmToken='+memberConfirmToken+ '\n',
 
             },
             function (err, info, response) {
@@ -39,15 +57,17 @@ export const teamMembers = {
                 if(err)
                     console.log(err);
                 else
-                    response.redirect('https://metrologistnsnd-beta-frontend.herokuapp.com/');
+                    response.redirect('http://metrologistnsnd-beta-frontend.herokuapp.com/');
             });
         return {
             token: jwt.sign({ memberId: member.id }, "jwtsecret123"),
             member,
+
+
         }
     },
     async confirMemberEmail(parent: any, { memberConfirmToken, emailMembers }: { memberConfirmToken: string; emailMembers: string },
-                       ctx: Context
+                            ctx: Context
     ) {
 
         if (!memberConfirmToken || !emailMembers) {
@@ -61,7 +81,7 @@ export const teamMembers = {
             throw new Error('no right token or email');
         }
 
-        await updateUserResetToken(
+        await updateTeamResetToken(
             ctx,
             member.emailMembers,
             {
@@ -76,10 +96,10 @@ export const teamMembers = {
         };
     },
     async deleteTeamMembers(parent, { id }, ctx: Context, info) {
-        const teamId =getTeamMemberId(ctx)
-        const teamMemberExists = await ctx.prisma.$exists.team({
+        const teamId =await ctx.prisma.team({id:id});
+        const teamMemberExists = await ctx.prisma.$exists.teamMembers({
             id,
-            author: { id: teamId },
+            team: teamId ,
         });
         if (!teamMemberExists) {
             throw new Error(`Team member is not found or you're not the author`)
@@ -88,4 +108,3 @@ export const teamMembers = {
         return ctx.prisma.deleteTeamMembers({ id })
     },
 };
-
