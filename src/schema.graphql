@@ -155,7 +155,7 @@ type MyDevice{
 type Team{
     id: ID!
     name:String!
-    author:User!
+    author:User
     teamMembers:[TeamMembers!]!
     payment:Boolean
     role:Role!
