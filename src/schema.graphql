@@ -20,6 +20,7 @@ type Query {
     me: User
     myDevice(id:ID!):MyDevice
     Appointments(id:ID!):Appointments
+    teamDevices(emailMembers:String):[MyDevice]
 }
 
 type Mutation {
@@ -75,6 +76,7 @@ type User {
     emailConfirmToken: String
     resetToken: String!
     teams:[Team!]!
+     teamMemberEmail:[TeamMembers!]!
 appointments:[Appointments!]!
 }
 
@@ -164,6 +166,7 @@ type Team{
 type TeamMembers{
     id: ID!
     team:Team!
+     userEmail:User
     emailMembers:String!
     member:Members!
     memberConfirmed:Boolean
