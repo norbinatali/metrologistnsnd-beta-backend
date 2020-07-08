@@ -137,7 +137,24 @@ export const Query = {
 
 
     },
-       async TeamMembers(parent, { id,emailMembers}, ctx: Context){
+  async teamDevices(parent,{ emailMembers}, ctx:Context) {
+
+        const membeConfirmedTeam = await ctx.prisma.$exists.teamMembers({emailMembers, memberConfirmed: true});
+        if (membeConfirmedTeam) {
+            Error('member is not exist')
+        }
+
+        const memberDevs = await ctx.prisma.user({email: emailMembers}).mydevices();
+        if (!memberDevs.length) {          // 0,null, false undefined ... =fasle
+            Error('user has not devices')  // var b = memberDevs.map(x=>x*2)
+
+        }
+        console.log(memberDevs);
+
+        return  memberDevs
+
+    },
+        async TeamMembers(parent, { id,emailMembers}, ctx: Context){
            const teamId =await ctx.prisma.team({id:id});
           const teamMemberEmail=ctx.prisma.teamMembers({ emailMembers});
 
