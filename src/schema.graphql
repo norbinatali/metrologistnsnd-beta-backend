@@ -46,7 +46,7 @@ type Mutation {
     createTeam(name:String!):Team!
     teamUser(id:ID!):Team!
     deleteTeam(id:ID!):Team!
-    createTeamMembers(emailMembers:String!, teamId:ID!):TeamMembers!
+    createTeamMembers(emailMember:String!, teamId:ID!):TeamMembers!
     confirMemberEmail(emailMembers:String!, memberConfirmToken:String!):TeamMembers!
     deleteTeamMembers(id:ID):TeamMembers!
     createNewAppointment(title:String,start_date:DateTime, end_date:DateTime, location:String,notes:String):Appointments!
