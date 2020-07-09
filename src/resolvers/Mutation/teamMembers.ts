@@ -11,12 +11,12 @@ import * as jwt from 'jsonwebtoken'
 const nodemailer = require("nodemailer");
 
 export const teamMembers = {
-    async createTeamMembers(parent, {emailMembers,teamId}, ctx: Context){
+    async createTeamMembers(parent, {emailMember,teamId}, ctx: Context){
 
-        if(emailMembers === ""){
+        if(emailMember === ""){
             throw new Error('no new member provided');
         }
-        const userTeam=  await ctx.prisma.user({email:emailMembers});
+        const userTeam=  await ctx.prisma.user({email:emailMember});
         if(!userTeam){
             throw new Error('User is not exist. Користувач не існує')
         }
@@ -27,7 +27,7 @@ export const teamMembers = {
 
         const member = await ctx.prisma.createTeamMembers({
             
-            emailMembers ,
+            emailMembers:emailMember,
             member:"MEMBER1",
             memberConfirmToken,
             memberConfirmed: false,
