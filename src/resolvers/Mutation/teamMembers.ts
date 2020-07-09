@@ -11,27 +11,27 @@ import * as jwt from 'jsonwebtoken'
 const nodemailer = require("nodemailer");
 
 export const teamMembers = {
-    async createTeamMembers(parent, args, ctx: Context){
+    async createTeamMembers(parent, {emailMembers,teamId}, ctx: Context){
 
-        if(args.emailMembers === ""){
+        if(emailMembers === ""){
             throw new Error('no new member provided');
         }
-        const userTeam=  await ctx.prisma.user({email:args.emailMembers});
+        const userTeam=  await ctx.prisma.user({email:emailMembers});
         if(!userTeam){
             throw new Error('User is not exist. Користувач не існує')
         }
 
         const memberConfirmToken = uuid();
 
-        const teamId= await ctx.prisma.team({id:args.id});
+        const teamID= await ctx.prisma.team({id:teamId});
 
         const member = await ctx.prisma.createTeamMembers({
-            ...args,
-            emailMembers:args.emailMembers ,
+            
+            emailMembers ,
             member:"MEMBER1",
             memberConfirmToken,
             memberConfirmed: false,
-            team:{connect:{id:teamId.id}}
+            team:{connect:{id:teamId}}
         });
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
