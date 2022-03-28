@@ -1,4 +1,4 @@
-import {getUserId, Context, getTRId} from '../../utils'
+import {getUserId, Context} from '../../utils'
 
 
 export const mydevice={
@@ -48,9 +48,6 @@ createNewMyDevice: async function (parent, {name_device,brand_device,series_devi
         if (!mydeviceExists) {
             throw new Error(`Post not found or you're not the author`)
         }
-
         return ctx.prisma.deleteMyDevice({ id })
     },
-
-
 };

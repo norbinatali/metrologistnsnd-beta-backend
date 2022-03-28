@@ -1,8 +1,4 @@
-import {getUserId, Context, getTRId} from '../../utils'
-
-import {tr} from "./tr";
-import {prisma} from "../../generated/prisma-client";
-
+import {getUserId, Context} from '../../utils'
 
 
 export const device = {
@@ -14,28 +10,21 @@ export const device = {
             name_EN: name_EN,
             name_RUS: name_RUS,
             module: module,
-            tr:{connect: {id: ctx.request.prisma.tR.id}},
-             dtc:{connect:{id:ctx.request.prisma.dTC.id}},
-           
+            tr: {connect: {id: ctx.request.prisma.tR.id}},
+            dtc: {connect: {id: ctx.request.prisma.dTC.id}},
         })
     },
 
-    async publishDevice(parent, { id }, ctx: Context, info) {
+    async publishDevice(parent, {id}, ctx: Context, info) {
         const userId = getUserId(ctx);
-   
-
         return ctx.prisma.updateDevice({
-            where: { id },
-            data: { published: true },
+            where: {id},
+            data: {published: true},
         })
     },
 
-    async deleteDevice(parent, { id }, ctx: Context, info) {
+    async deleteDevice(parent, {id}, ctx: Context, info) {
         const userId = getUserId(ctx)
-      
-
-        return ctx.prisma.deleteDevice({ id })
+        return ctx.prisma.deleteDevice({id})
     },
-
-
 };

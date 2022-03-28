@@ -1,15 +1,12 @@
-import { getUserId, Context } from '../../utils'
-import {device} from "./device";
+import {Context} from '../../utils'
 
-export const dtc ={
-
+export const dtc = {
 
     createNewDTC: async function (parent, {name_UA, name_EN}, ctx: Context, info) {
-
         return ctx.prisma.createDTC({
-            name_UA:name_UA,
-            name_EN:name_EN,
-            device_id:{connect:{id: ctx.request.prisma.device.id}}
+            name_UA: name_UA,
+            name_EN: name_EN,
+            device_id: {connect: {id: ctx.request.prisma.device.id}}
         })
     }
 };

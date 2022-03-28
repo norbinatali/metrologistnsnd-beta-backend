@@ -1,10 +1,6 @@
-import { v4 } from "uuid";
 import {Context} from "./utils";
 import * as Email from 'email-templates';
 import {User} from "./generated/prisma-client";
-
-import {doc} from "prettier";
-
 
 export interface IGraphqlAuthenticationConfig {
     mailer?: Email;
@@ -26,7 +22,5 @@ export function graphqlAuthenticationConfig(
         requiredConfirmedEmailForLogin: false,
         validatePassword: value => value.length >= 8
     };
-
-
     return Object.assign(defaults, options);
 }

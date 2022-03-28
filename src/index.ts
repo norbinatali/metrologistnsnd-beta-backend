@@ -8,18 +8,16 @@ require('dotenv').config();
 const server = new ApolloServer({
     cors: {
         credentials: true,
-        origin: ['https://metrologistnsnd-beta-frontend.herokuapp.com'],
+        origin: ['https://metrologistnsnd-beta-frontend.herokuapp.com', 'http://localhost:3000/'],
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
     },
     introspection: true,
-    playground: true,
     typeDefs: importSchema('./src/schema.graphql'),
     resolvers,
     context: request => ({
         ...request,
         resolverValidationOptions: {requireResolversForResolveType: false,},
         prisma,
-
     }),
 });
 

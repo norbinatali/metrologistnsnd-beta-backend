@@ -1,4 +1,4 @@
-import { getUserId, Context } from '../../utils'
+import {getUserId, Context} from '../../utils'
 
 export const team = {
     async createTeam(parent, {name}, ctx: Context, info) {
@@ -10,9 +10,6 @@ export const team = {
                     connect: {id: userId},
                 },
             }
-            )
+        )
     },
-
-   
-   
 }
