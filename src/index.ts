@@ -1,7 +1,7 @@
 import {prisma} from './generated/prisma-client'
 import resolvers from './resolvers'
 import { ApolloServer } from 'apollo-server-express';
-import {importSchema} from 'graphql-import'
+const { loadFiles } = require('@graphql-tools/load-files')
 import {ApolloServerPluginLandingPageGraphQLPlayground, ApolloServerPluginDrainHttpServer} from 'apollo-server-core';
 import * as express from 'express';
 import * as http from 'http';
@@ -15,12 +15,11 @@ async function startApolloServer() {
 
     // CORS configuration
     const corsOptions = {
-        origin: ['http://localhost:3000'],
+        origin: ['http://localhost:3000', 'https://metrologistnsnd-beta-frontend.herokuapp.com/'],
         credentials: true
     }
-
     const server = new ApolloServer({
-        typeDefs: importSchema('./src/schema.graphql'),
+        typeDefs: await loadFiles('src/schema.graphql'),
         resolvers,
         introspection: true,
         context: request => ({
