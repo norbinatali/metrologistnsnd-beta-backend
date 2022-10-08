@@ -1,72 +1,75 @@
-type Post {
-  id: ID! @id
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-  published: Boolean! @default(value: false)
-  title: String!
-  content: String!
-  author: User!
+model Post {
+  id Int    @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean @default(value: false)
+  title String
+  content String
+  author User? @relation(fields: [authorId], references: [id])
+  authorId  Int?
 }
 
-type User {
-  id: ID! @id
-  email: String! @unique
-  password: String!
-  name: String!
-  companyName:String
-  country:String
-  posts: [Post!]!
-   mydevices: [MyDevice!]!
-  devices: [Device!]!
-  appointments:[Appointments!]!
-  emailConfirmed: Boolean!
-  emailConfirmToken:String!
-  role: Role! @default(value: CUSTOMER)
-
-  resetToken: String
-  resetExpires: DateTime
-  lastLogin: DateTime
-    joinedAt: DateTime!
-    teams:[Team!]!
+model User {
+  id Int  @id @default(autoincrement())
+  email String @unique
+  password String
+  name String
+  companyName String
+  country String
+  posts Post[]
+   mydevices MyDevice[]
+  devices Device[]
+  appointments Appointments[]
+  emailConfirmed Boolean
+  emailConfirmToken String
+  role Role @default(value: CUSTOMER)
+  resetToken String
+  resetExpires DateTime
+  lastLogin DateTime
+    joinedAt DateTime
+    teams Team[]
 }
-type Device {
-  id: ID! @id
-  published: Boolean! @default(value: false)
-  name_EN: String!
-  name_UA: String!
-  name_RUS:String
-  module:String
-  tr: TR!
-  dtc: DTC!
-  author: User
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
+model Device {
+  id Int @id @default(autoincrement())
+  published Boolean @default(value: false)
+  name_EN String
+  name_UA String
+  name_RUS String
+  module String
+  tr TR? @relation(fields: [deviceId], references: [id])
+  dtc DTC? @relation(fields: [deviceDTC], references: [id])
+  author User? @relation(fields: [deviceUser], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deviceId Int?
+  deviceDTC Int?
+  deviceUser Int?
 }
-type DTC{
-id: ID! @id
-name_UA: String!
-name_EN: String!
-device_id: [Device!]!
-createdAt: DateTime! @createdAt
-updatedAt: DateTime! @updatedAt
+model DTC{
+id Int  @id @default(autoincrement())
+name_UA String
+name_EN String
+device_id Device[]
+createdAt DateTime @default(now())
+updatedAt DateTime @updatedAt
 
-}
-
-
-type TR{
-id: ID! @id
-name_TR_UA:String!
-name_TR_EN: String!
-device_id: [Device!]!
-createdAt: DateTime! @createdAt
-updatedAt: DateTime! @updatedAt
 }
 
-type LetterEmail{
-id: ID! @id
-from: String!
-subject: String!
-text: String!
+
+model TR{
+id Int  @id @default(autoincrement())
+name_TR_UA String
+name_TR_EN String
+device_id Device[]
+createdAt DateTime @default(now())
+updatedAt DateTime @updatedAt
+}
+
+model LetterEmail{
+id Int @id @default(autoincrement())
+from String
+subject String
+text String
 }
 
 enum Role{
@@ -74,46 +77,46 @@ ADMIN
 CUSTOMER
 TEAM
 }
-type MyDevice{
-id: ID! @id
-name_device: String!
-brand_device: String!
-series_device: String!
-kind_device: String
-certificate_calibration:Boolean
-certificate_verification:Boolean
-certificate_conformity:Boolean
-module_device: String
-tr_device:String
-certificate_assessment_number:String
-certificate_verification_number:String
-certificate_calibration_number:String
-department_assessment_center:String
-department_verification_center:String
-department_calibration_center:String
-conformity_data:DateTime
-calibration_data:DateTime
-valid_verification:DateTime
-notes:String
-author: User!
-createdAt: DateTime! @createdAt
+model MyDevice{
+id Int @id @default(autoincrement())
+name_device String
+brand_device String
+series_device String
+kind_device String
+certificate_calibration Boolean
+certificate_verification Boolean
+certificate_conformity Boolean
+module_device String
+tr_device String
+certificate_assessment_number String
+certificate_verification_number String
+certificate_calibration_number String
+department_assessment_center String
+department_verification_center String
+department_calibration_center String
+conformity_data DateTime
+calibration_data DateTime
+valid_verification DateTime
+notes String
+author User? @relation(fields: [id], references: [id])
+createdAt DateTime @default(now())
 }
-type Team{
-    id: ID! @id
-    name:String! @unique
-    author:User
-    teamMembers:[TeamMembers!]!
-    payment:Boolean
-    role:Role! @default(value: TEAM)
+model Team{
+    id Int @id @default(autoincrement())
+    name String @unique
+    author User? @relation(fields: [id], references: [id])
+    teamMembers TeamMembers[]
+    payment Boolean
+    role Role @default(value: TEAM)
 }
 
-type TeamMembers{
-id: ID! @id
-emailMembers:String! @unique
-member:Members! @default(value: MEMBER1)
-memberConfirmed:Boolean
-memberConfirmToken:String
-team:Team!
+model TeamMembers{
+id Int @id @default(autoincrement())
+emailMembers String @unique
+member Members @default(value: MEMBER1)
+memberConfirmed Boolean
+memberConfirmToken String
+team Team? @relation(fields: [id], references: [id])
 }
 enum Members{
 MEMBER1
@@ -122,12 +125,19 @@ MEMBER3
 MEMBER4
 MEMBER5
 }
-type Appointments {
-id: ID! @id
-title:String
-start_date:DateTime
-end_date:DateTime
-location:String
-notes:String
-author:User!
+model Appointments {
+id Int @id @default(autoincrement())
+title String
+start_date DateTime
+end_date DateTime
+location String
+notes String
+author User? @relation(fields: [id], references: [id])
+}
+datasource db {
+  provider = "postgresql"
+  url      = env("https://eu1.prisma.sh/public-lightfright-56/backend/dev")
+}
+generator client {
+  provider = "prisma-client-js"
 }
